@@ -2,6 +2,8 @@
   border: 3px solid #70b959;
   height: 100%;
   width: 100%;
+  max-width: 1350px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -15,8 +17,6 @@
 }
 
 .cnt_walet_text {
-  margin-left: 30px;
-  margin-top: 25px;
   padding-bottom: 4px;
   border-bottom: 3px solid #70B959;
   text-decoration: none;
@@ -31,9 +31,9 @@
   text-align: center;
 }
 
-.cnt_walet_text:link {
+/* .cnt_walet_text:link {
   color: #FF8159;
-}
+} */
 
 /* visited link */
 .cnt_walet_text:visited {
@@ -41,7 +41,7 @@
 }
 
 /* mouse over link */
-.cnt_walet_text:hover {
+a.cnt_walet_text:hover {
   color: #FF8159;
 }
 
@@ -93,4 +93,207 @@
 
 .pdrive_mint_steps {
   margin-top: 60px;
+  text-align: center;
+}
+
+.cnt_wallet {
+  margin-top: 25px;
+}
+
+.cnt_wallet_adr {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 29px;
+  color: #70B959;
+  padding-top: 8px;
+}
+
+.mint_btn {
+  background-color: #70B959;
+  color: #1d1c1c;
+  padding: 5px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.mint_btn:hover {
+  background-color: #FF8159;
+}
+
+.hr_line {
+  background-color: #FF8159;
+  width: 85%;
+  margin: 0;
+  padding: 0;
+  border: 3px solid #FF8159;
+}
+
+.mb {
+  margin-bottom: 10px;
+}
+
+.extra_lh {
+  line-height: 45px;
+}
+
+.count_flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.arrow_flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow_flex span {
+  font-size: 30px;
+  color: #70B959;
+  cursor: pointer;
+  outline: 0;
+  text-decoration: none;
+}
+
+.arrow_flex span:hover {
+  color: #FF8159;
+}
+
+@media (width < 768px) {
+  .pdrive_landing_page {
+    padding: 15px;
+  }
+
+  .pdrive_page_top {
+    display: block;
+    justify-content: unset;
+  }
+
+  .eth_details_box_desk {
+    display: none;
+  }
+
+  .cnt_wallet {
+    margin-top: 5px;
+  }
+
+  .cnt_walet_dtails {
+    margin-bottom: 5px;
+    margin-top: 0px;
+    margin-right: 0;
+  }
+
+  .font_style_1,
+  .cnt_wallet_adr {
+    font-size: 18px;
+  }
+
+  .cnt_walet_text {
+    text-align: left;
+  }
+
+  .pdrive_logo_src {
+    padding: 5px 10px;
+  }
+
+  .pdrive_logo_src img {
+    width: 45px;
+    height: 65px;
+  }
+
+  .pdrive_page_body {
+    text-align: center;
+  }
+
+  .pdrive_page_body img {
+    width: 80%;
+    height: 140px;
+  }
+
+  .mint_btn {
+    font-size: 16px;
+  }
+
+  .pdrive_page_bottom {
+    padding: 15px;
+    width: calc(100% - 30px);
+  }
+
+  .pdrive_page_sound img,
+  .pdrive_page_social img {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (width > 767px) {
+  .cnt_walet_dtails_mob {
+    display: none;
+  }
+}
+
+@media (width > 767px) and (width < 992px) {
+  .font_style_1,
+  .cnt_wallet_adr {
+    font-size: 20px;
+  }
+
+  .pdrive_logo_src {
+    padding: 8px 22px;
+  }
+
+  .pdrive_logo_src img {
+    width: 45px;
+    height: 75px;
+  }
+
+  .pdrive_page_body {
+    text-align: center;
+  }
+
+  .pdrive_page_body img {
+    width: 80%;
+    height: 240px;
+  }
+
+  .mint_btn {
+    font-size: 18px;
+  }
+
+  .pdrive_page_sound img,
+  .pdrive_page_social img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (width > 991px) and (width < 1200px) {
+  .font_style_1,
+  .cnt_wallet_adr {
+    font-size: 24px;
+  }
+
+  .pdrive_logo_src img {
+    width: 55px;
+    height: 95px;
+  }
+
+  .pdrive_page_body {
+    text-align: center;
+  }
+
+  .pdrive_page_body img {
+    width: 85%;
+  }
+
+  .mint_btn {
+    font-size: 20px;
+  }
+
+  .pdrive_page_sound img,
+  .pdrive_page_social img {
+    width: 70px;
+    height: 70px;
+  }
 }

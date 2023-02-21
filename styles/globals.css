@@ -2,3 +2,30 @@ body {
   margin: 0;
   font-family: 'VCR OSD Mono', sans-serif;
 }
+
+.progressbar_border {
+  border: 3px solid #70B959;
+}
+
+.progressbar_width {  
+  background: #1d1c1c;
+  height: 20px;
+  border-radius: 0;
+  width: 350px;
+  overflow: hidden;
+}
+
+.progressbar_inner_bg {
+  background: rgba(112, 185, 89, 25%);
+  height: 20px;
+  border-radius: 0;
+  width: 350px;
+  overflow: hidden;
+}
+
+@media (width < 768px) {
+  .progressbar_width,
+  .progressbar_inner_bg {
+    width: 150px;
+  }
+}
