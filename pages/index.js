@@ -80,9 +80,7 @@ export default function Home() {
                 </div>
               </div>
               <div className={styles.cnt_wallet}>
-                <article className={`${styles.cnt_walet_dtails} ${styles.cnt_walet_dtails_mob} ${styles.font_style_1}`}>
-                  ETH: $1689 | GAS: 34 GWAI
-                </article>
+
                 {!showWallet
                   ?
                   <a href="" onClick={(e) => { connectWallet(e) }} className={`${styles.cnt_walet_text} ${styles.font_style_1}`}>
@@ -96,7 +94,7 @@ export default function Home() {
                 }
               </div>
             </div>
-            <div className={`${styles.eth_details_box} ${styles.eth_details_box_desk}`}>
+            <div className={`${styles.eth_details_box}`}>
               <article className={`${styles.cnt_walet_dtails} ${styles.font_style_1}`}>
                 ETH: {showWallet ? '$1689' : '$0000'} | GAS: {showWallet ? '34' : '00'} GWAI
               </article>
@@ -127,7 +125,7 @@ export default function Home() {
                         <span onClick={() => { decCount() }}>&#8711;</span>
                       </div>
                       <article className={`${styles.font_style_1}`}>
-                        <span id="count">{showNum ? showNum : 'x'}</span> <span className={styles.mint_btn} onClick={() => { mintNow() }}>MINT NOW</span> 0.24 ETH
+                        <span id="count">{showNum ? showNum : '0'}</span> <span className={styles.mint_btn} onClick={() => { mintNow() }}>MINT NOW</span> 0.24 ETH
                       </article>
                     </div>
                     <div>
