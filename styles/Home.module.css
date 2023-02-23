@@ -17,7 +17,7 @@
 }
 
 .cnt_walet_text {
-  padding-bottom: 4px;
+  padding-bottom: 5px;
   border-bottom: 3px solid #70B959;
   text-decoration: none;
 }
@@ -26,7 +26,7 @@
   font-style: normal;
   font-weight: 400;
   font-size: 30px;
-  line-height: 34px;
+  line-height: 1;
   color: #70B959;
   text-align: center;
 }
@@ -38,6 +38,14 @@
 /* visited link */
 .cnt_walet_text:visited {
   color: #70B959;
+}
+
+.pdrive_page_body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* mouse over link */
@@ -57,14 +65,14 @@ a.cnt_walet_text:hover {
 
 .pdrive_logo_img {
   background-color: #0d0c0c;
-  margin-left: -22.5px;
-  margin-top: -22.5px;
-  padding: 20px;
+  margin-left: -32.5px;
+  margin-top: -32.5px;
+  padding: 30px;
 }
 
 .pdrive_logo_src {
   border: 3px solid #70B959;
-  padding: 12px 32px;
+  padding: 10px 32px;
 }
 
 .pdrive_page_top {
@@ -74,14 +82,14 @@ a.cnt_walet_text:hover {
 }
 
 .cnt_walet_dtails {
-  padding-bottom: 4px;
+  padding-bottom: 5px;
   border-bottom: 3px solid #70B959;
-  margin-top: 25px;
+  margin-top: 30px;
   margin-right: 30px;
 }
 
 .mint_status_text {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .pdrive_page_bottom {
@@ -92,13 +100,18 @@ a.cnt_walet_text:hover {
   padding: 30px;
 }
 
+.main_logo_pepe {
+  width: 69.5%;
+  height: auto;
+}
+
 .pdrive_mint_steps {
   margin-top: 60px;
   text-align: center;
 }
 
 .cnt_wallet {
-  margin-top: 25px;
+  margin-top: 30px;
 }
 
 .cnt_wallet_adr {
@@ -113,6 +126,7 @@ a.cnt_walet_text:hover {
   background-color: #70B959;
   color: #0d0c0c;
   padding: 5px;
+  margin: 0 5px;
   font-size: 24px;
   cursor: pointer;
 }
@@ -150,11 +164,9 @@ a.cnt_walet_text:hover {
 }
 
 .arrow_flex span {
-  font-size: 30px;
-  color: #70B959;
+
   cursor: pointer;
-  outline: 0;
-  text-decoration: none;
+
 }
 
 .arrow_flex span:hover {
@@ -162,6 +174,25 @@ a.cnt_walet_text:hover {
 }
 
 @media (width < 768px) {
+  .pdrive_mint_steps {
+    margin-top: 30px;
+  }
+
+  .mint_status_text {
+    margin-bottom: 15px;
+  }
+
+  .main_logo_pepe {
+    width: 85%;
+  }
+
+  .pdrive_logo_img {
+    background-color: #0d0c0c;
+    margin-left: -17.5px;
+    margin-top: -17.5px;
+    padding: 15px;
+  }
+
   .pdrive_hero_section {
     min-height: calc(100vh - 40px);
 
@@ -182,7 +213,7 @@ a.cnt_walet_text:hover {
   }
 
   .cnt_wallet {
-    margin-top: 5px;
+    margin-top: 15px;
   }
 
   .cnt_walet_dtails {
@@ -194,6 +225,7 @@ a.cnt_walet_text:hover {
   .font_style_1,
   .cnt_wallet_adr {
     font-size: 18px;
+    line-height: 1;
   }
 
   .cnt_walet_text {
@@ -206,17 +238,12 @@ a.cnt_walet_text:hover {
 
   .pdrive_logo_src img {
     width: 45px;
-    height: 65px;
+    height: auto;
   }
 
-  .pdrive_page_body {
-    text-align: center;
-  }
 
-  .pdrive_page_body img {
-    width: 80%;
-    height: 140px;
-  }
+
+
 
   .mint_btn {
     font-size: 16px;
@@ -230,7 +257,7 @@ a.cnt_walet_text:hover {
   .pdrive_page_sound img,
   .pdrive_page_social img {
     width: 45px;
-    height: 45px;
+    height: auto;
   }
 }
 
@@ -253,17 +280,11 @@ a.cnt_walet_text:hover {
 
   .pdrive_logo_src img {
     width: 45px;
-    height: 75px;
+    height: auto;
   }
 
-  .pdrive_page_body {
-    text-align: center;
-  }
 
-  .pdrive_page_body img {
-    width: 80%;
-    height: 240px;
-  }
+
 
   .mint_btn {
     font-size: 18px;
@@ -272,7 +293,7 @@ a.cnt_walet_text:hover {
   .pdrive_page_sound img,
   .pdrive_page_social img {
     width: 60px;
-    height: 60px;
+    height: auto;
   }
 }
 
@@ -285,16 +306,12 @@ a.cnt_walet_text:hover {
 
   .pdrive_logo_src img {
     width: 55px;
-    height: 95px;
+    height: auto;
   }
 
-  .pdrive_page_body {
-    text-align: center;
-  }
 
-  .pdrive_page_body img {
-    width: 85%;
-  }
+
+
 
   .mint_btn {
     font-size: 20px;
@@ -303,6 +320,6 @@ a.cnt_walet_text:hover {
   .pdrive_page_sound img,
   .pdrive_page_social img {
     width: 70px;
-    height: 70px;
+    height: auto;
   }
 }

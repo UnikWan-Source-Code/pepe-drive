@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 106">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #70b959;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x="31" y="0" width="2" height="2"/>
+  <rect class="cls-1" x="31" y="104" width="2" height="2"/>
+  <polygon class="cls-1" points="35 7 35 5 32 5 32 4 29 4 29 7 32 7 35 7"/>
+  <polygon class="cls-1" points="38 12 38 10 32 10 32 9 26 9 26 12 32 12 38 12"/>
+  <polygon class="cls-1" points="41 17 41 15 32 15 32 14 23 14 23 17 32 17 41 17"/>
+  <polygon class="cls-1" points="44 22 44 20 32 20 32 19 20 19 20 22 32 22 44 22"/>
+  <polygon class="cls-1" points="47 27 47 25 32 25 32 24 17 24 17 27 32 27 47 27"/>
+  <polygon class="cls-1" points="49 32 49 30 32 30 32 29 15 29 15 32 32 32 49 32"/>
+  <polygon class="cls-1" points="52 37 52 35 32 35 32 34 12 34 12 37 32 37 52 37"/>
+  <rect class="cls-1" x="11" y="74" width="15" height="3"/>
+  <rect class="cls-1" x="38" y="74" width="15" height="2"/>
+  <polygon class="cls-1" points="15 79 15 82 32 82 32 81 49 81 49 79 32 79 15 79"/>
+  <polygon class="cls-1" points="19 84 19 87 32 87 32 86 45 86 45 84 32 84 19 84"/>
+  <polygon class="cls-1" points="22 89 22 92 32 92 32 91 42 91 42 89 32 89 22 89"/>
+  <polygon class="cls-1" points="25 94 25 97 32 97 32 96 39 96 39 94 32 94 25 94"/>
+  <polygon class="cls-1" points="28 99 28 102 32 102 32 101 36 101 36 99 32 99 28 99"/>
+  <polygon class="cls-1" points="32 42 32 41 35 41 35 42 55 42 55 40 36 40 35 40 32 40 31 40 31 39 9 39 9 42 31 42 32 42"/>
+  <rect class="cls-1" x="54" y="64" width="5" height="2"/>
+  <rect class="cls-1" x="59" y="59" width="3" height="2"/>
+  <rect class="cls-1" x="2" y="59" width="3" height="3"/>
+  <rect class="cls-1" x="5" y="64" width="6" height="3"/>
+  <rect class="cls-1" x="8" y="69" width="11" height="3"/>
+  <rect class="cls-1" x="46" y="69" width="10" height="2"/>
+  <polygon class="cls-1" points="21 47 32 47 32 46 46 46 46 47 58 47 58 45 46 45 32 45 21 45 21 44 6 44 6 47 10 47 21 47"/>
+  <polygon class="cls-1" points="32 52 32 51 54 51 54 52 61 52 61 51 61 50 54 50 32 50 10 50 10 49 3 49 3 52 10 52 32 52"/>
+  <polygon class="cls-1" points="30 74 30 76 32 76 32 75 33 75 33 74 32 74 30 74"/>
+  <polygon class="cls-1" points="32 55 0 55 0 57 32 57 32 56 64 56 64 55 32 55"/>
+  <polygon class="cls-1" points="54 59 32 59 11 59 11 61 32 61 32 60 54 60 54 59"/>
+  <polygon class="cls-1" points="46 64 32 64 19 64 19 66 32 66 32 65 46 65 46 64"/>
+  <polygon class="cls-1" points="38 69 32 69 27 69 27 71 32 71 32 70 38 70 38 69"/>
+</svg>
