@@ -149,7 +149,7 @@ a.cnt_walet_text:hover {
 }
 
 .extra_lh {
-  line-height: 45px;
+  line-height: 1.2 !important;
 }
 
 .count_flex {
@@ -174,7 +174,23 @@ a.cnt_walet_text:hover {
   color: #B5FF9E;
 }
 
+.showinmobile {
+  display: none;
+}
+
+.showindesktop {
+  display: block;
+}
+
 @media (width < 768px) {
+  .showinmobile {
+    display: block;
+  }
+
+  .showindesktop {
+    display: none;
+  }
+
   .pdrive_mint_steps {
     margin-top: 30px;
   }
@@ -222,6 +238,10 @@ a.cnt_walet_text:hover {
     margin-bottom: 5px;
     margin-top: 0px;
     margin-right: 0;
+    text-align: left !important;
+    border: none !important;
+    font-size: 15px !important;
+    margin-top: 12px !important;
   }
 
   .font_style_1,
@@ -243,10 +263,6 @@ a.cnt_walet_text:hover {
     height: auto;
   }
 
-
-
-
-
   .mint_btn {
     font-size: 16px;
   }
@@ -263,11 +279,6 @@ a.cnt_walet_text:hover {
   }
 }
 
-@media (width > 767px) {
-  .cnt_walet_dtails_mob {
-    display: none;
-  }
-}
 
 @media (width > 767px) and (width < 992px) {
 

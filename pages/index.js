@@ -11,7 +11,7 @@ import mainLogo from "../public/images/pdrive-main-logo.svg";
 import soundOn from "../public/images/sound-on.svg";
 import soundOff from "../public/images/sound-off.svg";
 import twitterLogo from "../public/images/twitter-logo.svg";
-import PriceDetails from "../public/components/PriceDetails";
+import PriceDetails from "../components/PriceDetails";
 
 
 
@@ -95,15 +95,18 @@ export default function Home() {
                   <>
                     <article className={`${styles.font_style_1} ${styles.cnt_walet_text} `}>WALLET CONNECTED</article>
                     <article className={`${styles.font_style_1} ${styles.cnt_wallet_adr} `}>0x29...C938</article>
-                    <PriceDetails />
+                    <span className={styles.showinmobile}>
+                      <PriceDetails showWallet={showWallet} />
+                    </span>
+
                   </>
                 }
               </div>
             </div>
             <div className={`${styles.eth_details_box}`}>
-              <article className={`${styles.cnt_walet_dtails} ${styles.font_style_1}`}>
-                ETH: {showWallet ? '$1689' : '$0000'} | GAS: {showWallet ? '34' : '00'} GWEI
-              </article>
+              <span className={styles.showindesktop}>
+                <PriceDetails showWallet={showWallet} />
+              </span>
             </div>
           </div>
           <div className={styles.pdrive_page_body}>
