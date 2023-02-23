@@ -30,8 +30,8 @@
   line-height: 1;
   color: #70B959;
   text-align: center;
-  text-shadow: 10px 0px 3px #14212b, -10px 0px 3px #2b1414;
-  filter: blur(0.8px);
+  text-shadow: 6px 0px 3px #14212b, -6px 0px 3px #2b1414;
+  filter: blur(0.5px);
 }
 
 /* .cnt_walet_text:link {
