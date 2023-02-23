@@ -20,6 +20,7 @@
   padding-bottom: 5px;
   border-bottom: 3px solid #70B959;
   text-decoration: none;
+  text-align: left !important;
 }
 
 .font_style_1 {
@@ -29,6 +30,8 @@
   line-height: 1;
   color: #70B959;
   text-align: center;
+  text-shadow: 10px 0px 3px #14212b, -10px 0px 3px #2b1414;
+  filter: blur(0.8px);
 }
 
 /* .cnt_walet_text:link {
@@ -115,11 +118,8 @@ a.cnt_walet_text:hover {
 }
 
 .cnt_wallet_adr {
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 29px;
-  color: #70B959;
   padding-top: 8px;
+  text-align: left;
 }
 
 .mint_btn {
@@ -129,6 +129,7 @@ a.cnt_walet_text:hover {
   margin: 0 5px;
   font-size: 24px;
   cursor: pointer;
+  text-shadow: none;
 }
 
 .mint_btn:hover {
@@ -195,6 +196,7 @@ a.cnt_walet_text:hover {
 
   .pdrive_hero_section {
     min-height: calc(100vh - 40px);
+    width: unset;
 
   }
 
@@ -233,7 +235,7 @@ a.cnt_walet_text:hover {
   }
 
   .pdrive_logo_src {
-    padding: 5px 10px;
+    padding: 5px 21.5px;
   }
 
   .pdrive_logo_src img {

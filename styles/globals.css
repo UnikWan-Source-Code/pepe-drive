@@ -3,6 +3,10 @@ body {
   font-family: 'VCR OSD Mono', sans-serif;
 }
 
+svg {
+  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+}
+
 .progressbar_border {
   border: 3px solid #70B959;
 }

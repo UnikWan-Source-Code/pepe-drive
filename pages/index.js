@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ProgressBar from "@ramonak/react-progress-bar";
-//import { Inter } from "@next/font/google";
+import { useState } from "react";
+import Link from "next/link";
 
 import styles from "../styles/Home.module.css";
 import mintUpimg from "../public/images/mint-up.svg";
@@ -10,11 +11,11 @@ import mainLogo from "../public/images/pdrive-main-logo.svg";
 import soundOn from "../public/images/sound-on.svg";
 import soundOff from "../public/images/sound-off.svg";
 import twitterLogo from "../public/images/twitter-logo.svg";
+import PriceDetails from "../public/components/PriceDetails";
 
-import { useState } from "react";
-import Link from "next/link";
 
-//const inter = Inter({ subsets: ["latin"] });
+
+
 
 export default function Home() {
   const [showSound, setSound] = useState(false);
@@ -89,10 +90,12 @@ export default function Home() {
                   <a href="" onClick={(e) => { connectWallet(e) }} className={`${styles.cnt_walet_text} ${styles.font_style_1}`}>
                     CONNECT WALLET
                   </a>
+
                   :
                   <>
-                    <article className={`${styles.cnt_walet_text} ${styles.font_style_1}`}>WALLET CONNECTED</article>
-                    <article className={styles.cnt_wallet_adr}>0x29...C938</article>
+                    <article className={`${styles.font_style_1} ${styles.cnt_walet_text} `}>WALLET CONNECTED</article>
+                    <article className={`${styles.font_style_1} ${styles.cnt_wallet_adr} `}>0x29...C938</article>
+                    <PriceDetails />
                   </>
                 }
               </div>
