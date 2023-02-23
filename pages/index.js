@@ -49,7 +49,7 @@ export default function Home() {
     else {
       setSound(false);
       audio.pause();
-      audio.currentTime = 0;
+      // audio.currentTime = 0;
     }
   }
 
@@ -96,11 +96,10 @@ export default function Home() {
             </div>
             <div className={`${styles.eth_details_box}`}>
               <article className={`${styles.cnt_walet_dtails} ${styles.font_style_1}`}>
-                ETH: {showWallet ? '$1689' : '$0000'} | GAS: {showWallet ? '34' : '00'} GWAI
+                ETH: {showWallet ? '$1689' : '$0000'} | GAS: {showWallet ? '34' : '00'} GWEI
               </article>
             </div>
           </div>
-          <hr className={styles.hr_line} />
           <div className={styles.pdrive_page_body}>
             <Image
               src={mainLogo}
@@ -143,7 +142,10 @@ export default function Home() {
           </div>
           <div className={styles.pdrive_page_bottom}>
             <div className={styles.pdrive_page_sound}>
-              <audio id="audio" src="http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3" preload="auto"></audio>
+              <audio id="audio" preload="auto" loop>
+                <source src="../public/sound/pepe_drive_sound.mp3" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
               <Link href="/" onClick={(e) => { e.preventDefault(); togglePlay() }}>
                 <Image
                   src={showSound == true ? soundOn : soundOff}
@@ -182,7 +184,7 @@ export default function Home() {
                         X DAYS TO MINT
                       </article>
               }
-              <ProgressBar className={"progressbar_border"} barContainerClassName={(showConnection == "connected" || showConnection == "minted") ? "progressbar_inner_bg" : "progressbar_width"} completed={(showConnection == "connecting" || showConnection == "minting") ? 100 : (showConnection == "connected" || showConnection == "minted") ? 0 : 0} transitionDuration={(showConnection == "connected" || showConnection == "minted") ? "0s" : "2s"} bgColor={"#70B959"} borderRadius={"0"} />
+              <ProgressBar className={"progressbar_border"} barContainerClassName={(showConnection == "connected" || showConnection == "minted") ? "progressbar_inner_bg" : "progressbar_width"} completed={(showConnection == "connecting" || showConnection == "minting") ? 100 : (showConnection == "connected" || showConnection == "minted") ? 0 : 0} transitionDuration={(showConnection == "connected" || showConnection == "minted") ? "0s" : "2s"} bgColor={"#70B959"} borderRadius={"0"} isLabelVisible={false} />
             </div>
             <div className={styles.pdrive_page_social}>
               <Link target='_blank' href="https://twitter.com/">

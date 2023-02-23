@@ -11,7 +11,7 @@
 }
 
 .pdrive_landing_page {
-  background-color: #1d1c1c;
+  background-color: #0d0c0c;
   padding: 45px;
   min-height: calc(100vh - 90px);
 }
@@ -32,7 +32,7 @@
 }
 
 /* .cnt_walet_text:link {
-  color: #FF8159;
+  color: #B5FF9E;
 } */
 
 /* visited link */
@@ -42,12 +42,12 @@
 
 /* mouse over link */
 a.cnt_walet_text:hover {
-  color: #FF8159;
+  color: #B5FF9E;
 }
 
 /* selected link */
 .cnt_walet_text:active {
-  color: #FF8159;
+  color: #B5FF9E;
 }
 
 .pdrive_logo_box {
@@ -56,9 +56,9 @@ a.cnt_walet_text:hover {
 }
 
 .pdrive_logo_img {
-  background-color: #1d1c1c;
-  margin-left: -20px;
-  margin-top: -20px;
+  background-color: #0d0c0c;
+  margin-left: -22.5px;
+  margin-top: -22.5px;
   padding: 20px;
 }
 
@@ -111,22 +111,22 @@ a.cnt_walet_text:hover {
 
 .mint_btn {
   background-color: #70B959;
-  color: #1d1c1c;
+  color: #0d0c0c;
   padding: 5px;
   font-size: 24px;
   cursor: pointer;
 }
 
 .mint_btn:hover {
-  background-color: #FF8159;
+  background-color: #B5FF9E;
 }
 
 .hr_line {
-  background-color: #FF8159;
+  background-color: #B5FF9E;
   width: 85%;
   margin: 0;
   padding: 0;
-  border: 3px solid #FF8159;
+  border: 3px solid #B5FF9E;
 }
 
 .mb {
@@ -158,7 +158,7 @@ a.cnt_walet_text:hover {
 }
 
 .arrow_flex span:hover {
-  color: #FF8159;
+  color: #B5FF9E;
 }
 
 @media (width < 768px) {
