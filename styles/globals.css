@@ -1,6 +1,11 @@
+@font-face {
+  font-family: VCR_OSD_MONO;
+  src: url('../public/VCR_OSD_MONO.ttf');
+}
+
 body {
   margin: 0;
-  font-family: 'VCR OSD Mono', sans-serif;
+  font-family: VCR_OSD_MONO;
 }
 
 svg {
