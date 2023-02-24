@@ -4,8 +4,7 @@
 }
 
 img {
-  filter: drop-shadow(6px 0px 3px #14212b) drop-shadow(-6px 0px 3px #2b1414);
-  /* filter: blur(0.5px); */
+  filter: drop-shadow(6px 0px 3px #14212b) drop-shadow(-6px 0px 3px #2b1414) blur(0.5px);
 }
 
 body {
@@ -19,6 +18,7 @@ svg {
 
 .progressbar_border {
   border: 3px solid #70B959;
+  filter: drop-shadow(6px 0px 3px #14212b) drop-shadow(-6px 0px 3px #2b1414) blur(0.5px);
 }
 
 .progressbar_width {
