@@ -133,6 +133,7 @@ a.cnt_walet_text:hover {
   font-size: 24px;
   cursor: pointer;
   text-shadow: none;
+  filter: drop-shadow(6px 0px 3px #14212b) drop-shadow(-6px 0px 3px #2b1414) blur(0.5px);
 }
 
 .mint_btn:hover {
