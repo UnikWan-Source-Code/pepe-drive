@@ -176,6 +176,10 @@ a.cnt_walet_text:hover {
   color: #B5FF9E;
 }
 
+.showinmobile_f {
+  display: none;
+}
+
 .showinmobile {
   display: none;
 }
@@ -187,6 +191,10 @@ a.cnt_walet_text:hover {
 @media (width < 768px) {
   .showinmobile {
     display: block;
+  }
+
+  .showinmobile_f {
+    display: flex;
   }
 
   .showindesktop {
@@ -202,7 +210,8 @@ a.cnt_walet_text:hover {
   }
 
   .main_logo_pepe {
-    width: 85%;
+    width: 75%;
+    margin: auto;
   }
 
   .pdrive_logo_img {

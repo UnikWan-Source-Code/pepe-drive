@@ -7,7 +7,8 @@ import styles from "../styles/Home.module.css";
 import mintUpimg from "../public/images/mint-up.svg";
 import mintDownimg from "../public/images/mint-down.svg";
 import ethLogo from "../public/images/eth-logo.svg";
-import mainLogo from "../public/images/pdrive-main-logo.svg";
+import mainLogo from "../public/images/pdrive-main-logo.png";
+import mainLogoM from "../public/images/pdrive-main-logo-m.png";
 import soundOn from "../public/images/sound-on.svg";
 import soundOff from "../public/images/sound-off.svg";
 import twitterLogo from "../public/images/twitter-logo.svg";
@@ -110,11 +111,21 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.pdrive_page_body}>
-            <Image
-              className={styles.main_logo_pepe}
-              src={mainLogo}
-              alt="Logo"
-            />
+            <span className={styles.showindesktop}>
+              <Image
+                className={styles.main_logo_pepe}
+                src={mainLogo}
+                alt="Logo"
+              />
+            </span>
+            <span className={styles.showinmobile_f}>
+              <Image
+                className={styles.main_logo_pepe}
+                src={mainLogoM}
+                alt="Logo"
+              />
+            </span>
+
             <div className={styles.pdrive_mint_steps}>
               {showMint == true
                 ?
@@ -155,7 +166,7 @@ export default function Home() {
           <div className={styles.pdrive_page_bottom}>
             <div className={styles.pdrive_page_sound}>
               <audio id="audio" preload="auto" loop>
-                <source src='https://www.unikwan.com/projects/2023/pepe-drive/pepe_drive_sound.mp3' type="audio/mpeg" />
+                <source src='https://www.unikwan.com/projects/2023/pepe-drive/pepe_drip.mp3' type="audio/mp3" />
                 Your browser does not support the audio element.
               </audio>
               <span onClick={(e) => { e.preventDefault(); togglePlay() }}>
