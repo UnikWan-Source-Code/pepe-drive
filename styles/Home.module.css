@@ -108,6 +108,7 @@ a.cnt_walet_text:hover {
 .main_logo_pepe {
   width: 69.5%;
   height: auto;
+  margin: auto;
 }
 
 .pdrive_mint_steps {
@@ -188,6 +189,10 @@ a.cnt_walet_text:hover {
   display: block;
 }
 
+.showindesktop_f {
+  display: flex;
+}
+
 @media (width < 768px) {
   .showinmobile {
     display: block;
@@ -198,6 +203,10 @@ a.cnt_walet_text:hover {
   }
 
   .showindesktop {
+    display: none;
+  }
+
+  .showindesktop_f {
     display: none;
   }
 

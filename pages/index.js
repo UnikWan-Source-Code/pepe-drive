@@ -111,7 +111,7 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.pdrive_page_body}>
-            <span className={styles.showindesktop}>
+            <span className={styles.showindesktop_f}>
               <Image
                 className={styles.main_logo_pepe}
                 src={mainLogo}
