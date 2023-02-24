@@ -8,8 +8,7 @@
   justify-content: space-between;
   align-items: center;
   min-height: calc(100vh - 100px);
-  box-shadow: 6px 0px 3px #14212b, -6px 0px 3px #2b1414;
-  filter: blur(0.5px);
+  filter: drop-shadow(6px 0px 3px #14212b) drop-shadow(-6px 0px 3px #2b1414) blur(0.5px);
 }
 
 .pdrive_landing_page {
@@ -34,8 +33,8 @@
   line-height: 1;
   color: #70B959;
   text-align: center;
-  text-shadow: 6px 0px 3px #14212b, -6px 0px 3px #2b1414;
-  filter: blur(0.5px);
+  /* text-shadow: 6px 0px 3px #14212b, -6px 0px 3px #2b1414;
+  filter: blur(0.5px); */
 }
 
 /* .cnt_walet_text:link {
@@ -71,7 +70,7 @@ a.cnt_walet_text:hover {
 }
 
 .pdrive_logo_img {
-  background-color: #0d0c0c;
+  /* background-color: #0d0c0c; */
   margin-left: -32.5px;
   margin-top: -32.5px;
   padding: 30px;
@@ -80,8 +79,8 @@ a.cnt_walet_text:hover {
 .pdrive_logo_src {
   border: 3px solid #70B959;
   padding: 10px 32px;
-  box-shadow: 6px 0px 3px #14212b, -6px 0px 3px #2b1414;
-  filter: blur(0.5px);
+  /* box-shadow: 6px 0px 3px #14212b, -6px 0px 3px #2b1414;
+  filter: blur(0.5px); */
 
 }
 
@@ -119,6 +118,7 @@ a.cnt_walet_text:hover {
 .pdrive_mint_steps {
   margin-top: 60px;
   text-align: center;
+  min-height: 85px;
 }
 
 .cnt_wallet {
@@ -138,7 +138,7 @@ a.cnt_walet_text:hover {
   font-size: 24px;
   cursor: pointer;
   text-shadow: none;
-  filter: drop-shadow(6px 0px 3px #14212b) drop-shadow(-6px 0px 3px #2b1414) blur(0.5px);
+  /* filter: drop-shadow(6px 0px 3px #14212b) drop-shadow(-6px 0px 3px #2b1414) blur(0.5px); */
 }
 
 .mint_btn:hover {
@@ -230,7 +230,6 @@ a.cnt_walet_text:hover {
   }
 
   .pdrive_logo_img {
-    background-color: #0d0c0c;
     margin-left: -17.5px;
     margin-top: -17.5px;
     padding: 15px;
