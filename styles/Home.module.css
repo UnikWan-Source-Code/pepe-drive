@@ -8,6 +8,8 @@
   justify-content: space-between;
   align-items: center;
   min-height: calc(100vh - 100px);
+  box-shadow: 6px 0px 3px #14212b, -6px 0px 3px #2b1414;
+  filter: blur(0.5px);
 }
 
 .pdrive_landing_page {
@@ -78,6 +80,9 @@ a.cnt_walet_text:hover {
 .pdrive_logo_src {
   border: 3px solid #70B959;
   padding: 10px 32px;
+  box-shadow: 6px 0px 3px #14212b, -6px 0px 3px #2b1414;
+  filter: blur(0.5px);
+
 }
 
 .pdrive_page_top {
