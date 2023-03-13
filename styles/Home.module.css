@@ -208,7 +208,7 @@ a.cnt_walet_text:hover {
   width: 310px;
   padding-left: 30px;
   height: 30px;
-  background: #0d0c0c;
+  background: transparent;
   border: none;
   outline: none;
 }
@@ -234,7 +234,7 @@ a.cnt_walet_text:hover {
 }
 
 .login_input_hold {
-  background: #0d0c0c;
+  background: transparent;
   display: flex;
   align-items: center;
 }
