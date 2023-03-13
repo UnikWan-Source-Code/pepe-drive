@@ -40,9 +40,10 @@ export default function Home() {
     var tempErrorMsg =
       errorsList[Math.floor(Math.random() * errorsList.length)];
     if (
-      (passcode != "" && passcode === "pepelove") ||
-      passcode === "pepelaugh" ||
-      passcode === "pepecry"
+      passcode != "" &&
+      (passcode === "pepelove" ||
+        passcode === "pepelaugh" ||
+        passcode === "pepecry")
     ) {
       // router.push("/dashboard");
       setAllow(true);
@@ -83,7 +84,7 @@ export default function Home() {
                   <input
                     onChange={(e) => setPasscode(e.target.value)}
                     type={viewPwd ? "text" : "password"}
-                    maxlength="18"
+                    maxlength="12"
                     className={`${styles.login_input_elemnt} ${styles.font_style_1}`}
                   />
                   <Image
