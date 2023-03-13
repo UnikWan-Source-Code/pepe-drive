@@ -28,7 +28,7 @@ svg {
   border-radius: 0;
   width: 438px;
   overflow: hidden;
-  border: 4px solid black;
+  border: 4px solid #0d0c0c;
 }
 
 .progressbar_width>div {
@@ -40,7 +40,7 @@ svg {
   height: 31px;
   border-radius: 0;
   width: 438px;
-  border: 4px solid black;
+  border: 4px solid #0d0c0c;
   overflow: hidden;
 }
 

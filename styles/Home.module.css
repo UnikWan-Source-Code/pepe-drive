@@ -199,7 +199,49 @@ a.cnt_walet_text:hover {
   display: flex;
 }
 
+.login_input_elemnt {
+  border-radius: 0;
+  overflow: hidden;
+  width: 340px;
+  height: 30px;
+  background: #0d0c0c;
+  border: none;
+  outline: none;
+}
+
+.login_input_box {
+  border: 3px solid #70B959;
+  padding: 30px 35px;
+  background: url('../public/images/bar-bg-2.svg');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.enter_btn {
+  margin: auto;
+  text-shadow: none;
+  width: max-content;
+  padding: 0 40px;
+}
+
 @media (width < 768px) {
+  .login_input_elemnt {
+    width: 100%;
+    max-width: 215px;
+    height: 22px;
+    background: #0d0c0c;
+    border: none;
+    outline: none;
+  }
+
+  .login_input_box {
+    padding: 17px 20px;
+    margin: 20px 0;
+  }
+
   .showinmobile {
     display: block;
   }
