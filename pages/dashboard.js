@@ -3,7 +3,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { useState } from "react";
 import Link from "next/link";
 
-import styles from "../styles/Dashboard.module.css";
+import styles from "../styles/Home.module.css";
 import mintUpimg from "../public/images/mint-up.svg";
 import mintDownimg from "../public/images/mint-down.svg";
 import ethLogo from "../public/images/eth-logo.svg";
