@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 import mainLogo from "../public/images/pdrive-main-logo.png";
 import mainLogoM from "../public/images/pdrive-main-logo-m.png";
 
-export default function Login() {
+export default function Home() {
     const [passcode, setPasscode] = useState("");
     const [allow, setAllow] = useState(false);
     useEffect(() => {
