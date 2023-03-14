@@ -41,9 +41,9 @@ export default function Home() {
       errorsList[Math.floor(Math.random() * errorsList.length)];
     if (
       passcode != "" &&
-      (passcode === "pepelovessss" ||
-        passcode === "pepelaugh23ww" ||
-        passcode === "pepecrywwedd")
+      (passcode === "rosebud" ||
+        passcode === "delta9" ||
+        passcode === "sunflare")
     ) {
       // router.push("/dashboard");
       setAllow(true);
