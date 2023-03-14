@@ -25,7 +25,7 @@ export default function Dashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/dashboard");
+    router.push("/");
   }, []);
   const connectWallet = (e) => {
     e.preventDefault();
