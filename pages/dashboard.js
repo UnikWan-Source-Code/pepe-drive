@@ -1,6 +1,8 @@
 import Image from "next/image";
 import ProgressBar from "@ramonak/react-progress-bar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+
 import Link from "next/link";
 
 import styles from "../styles/Home.module.css";
@@ -20,7 +22,11 @@ export default function Dashboard() {
   const [showMint, setMint] = useState(false);
   const [showConnection, setConnection] = useState("");
   const [showNum, setNum] = useState(0);
+  const router = useRouter();
 
+  useEffect(() => {
+    router.push("/dashboard");
+  }, []);
   const connectWallet = (e) => {
     e.preventDefault();
     setConnection("connecting");
