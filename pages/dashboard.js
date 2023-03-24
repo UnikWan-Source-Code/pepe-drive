@@ -78,20 +78,20 @@ export default function Dashboard() {
     console.log(parsed);
 
     if (parsed === 'execution reverted: token limit per wallet reached') {
-      return "Limit for your wallet reached"
+      return "TOKEN LIMIT REACHED"
     }
 
     if (parsed === 'insufficient funds for intrinsic transaction cost') {
-      return 'You need more ETH to mint';
+      return 'YOU NEED MORE ETH';
     }
     if (parsed == "execution reverted: Mint not started, yet") {
-      return "Mint not active"
+      return "MINT NOT OPEN"
     }
     if (parsed == "execution reverted: Mint is over") {
-      return "Mint is over"
+      return "MINT IS OVER"
     }
     if (parsed == "execution reverted: Invalid proof") {
-      return "Not whitelisted. Sad."
+      return "NOT WHITELISTED. SAD."
     }
 
     return JSON.parse(JSON.stringify(error)).reason;
@@ -360,9 +360,10 @@ export default function Dashboard() {
               ) : showWallet == true ? (
                 <>
                   <div>
-                    <div className={`${styles.mb} ${styles.count_flex}`}>
-                      <div className={styles.arrow_flex}>
+                    <div className={`${styles.mb} ${styles.count_flex}`} >
+                      <div className={styles.arrow_flex} >
                         <span
+
                           onClick={() => {
                             incCount();
                           }}
@@ -374,9 +375,11 @@ export default function Dashboard() {
                             height={20}
                           />
                         </span>
+                        <div className="p-[1px]"></div>
                         <span
                           onClick={() => {
-                            decCount();
+                            if (showNum > 1)
+                              decCount();
                           }}
                         >
                           <Image
@@ -387,7 +390,7 @@ export default function Dashboard() {
                           />
                         </span>
                       </div>
-                      {prepareError ? <div className={`${styles.font_style_1}`}> {parseErrorMessage(prepareError)}</div> : (
+                      {prepareError ? <div className={`${styles.font_style_1}`}> {parseErrorMessage(prepareError).toUpperCase().replace(/EXECUTION REVERTED:/g, "")}</div> : (
 
 
                         <article className={`${styles.font_style_1}`}>
@@ -406,7 +409,7 @@ export default function Dashboard() {
                     </div>
                     <div>
                       <article className={`${styles.font_style_1}`}>
-                        {alreadyMinted} / 3333 AVAILABLE
+                        {alreadyMinted} / 3333 MINTED
                       </article>
                     </div>
                   </div>
@@ -471,7 +474,7 @@ export default function Dashboard() {
                 <article
                   className={`${styles.mint_status_text} ${styles.font_style_1}`}
                 >
-                  X DAYS TO MINT
+
                 </article>
               )}
               <ProgressBar
@@ -500,7 +503,7 @@ export default function Dashboard() {
               />
             </div>
             <div className={styles.pdrive_page_social}>
-              <Link target="_blank" href="https://twitter.com/">
+              <Link target="_blank" href="https://twitter.com/PepeDrive_II">
                 <Image src={twitterLogo} alt="Logo" width={80} height={80} />
               </Link>
             </div>
