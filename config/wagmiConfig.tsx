@@ -11,7 +11,7 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 const { chains, webSocketProvider, provider } = configureChains(
     [goerli, mainnet],
     [
-        infuraProvider({ apiKey: 'b67411996de3465c99125ad052ccefef' }),
+        // infuraProvider({ apiKey: '' }),
         publicProvider(),
     ]
 );
