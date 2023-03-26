@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import styles from "../styles/Home.module.css";
 import mainLogo from "../public/images/pdrive-main-logo.png";
 import mainLogoM from "../public/images/pdrive-main-logo-m.png";
 import eyeShut from "../public/images/eye-shut.svg";
 import eyeOpen from "../public/images/eye-open.svg";
-import "../styles/Home.module.css";
 
 export default function Home() {
   const [passcode, setPasscode] = useState("");
@@ -57,6 +57,10 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>Pepe Drive Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <main className={styles.pdrive_landing_page}>
         <div className={styles.pdrive_hero_section}>
           <div className={styles.pdrive_page_top}></div>
