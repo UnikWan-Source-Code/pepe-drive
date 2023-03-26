@@ -5,7 +5,9 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <title>Pepe Drive</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Pepe drive website" />
         <link rel="icon" href="/favicon.ico" />
         <link
