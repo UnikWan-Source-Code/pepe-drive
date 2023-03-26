@@ -239,7 +239,74 @@ a.cnt_walet_text:hover {
   align-items: center;
 }
 
-@media (width < 768px) {
+
+@media only screen and (width > 767px) and (width < 992px) {
+
+  .font_style_1,
+  .cnt_wallet_adr {
+    font-size: 20px;
+  }
+
+  .pdrive_logo_src {
+    padding: 8px 22px;
+  }
+
+  .pdrive_logo_src img {
+    width: 45px;
+    height: auto;
+  }
+
+
+
+
+  .mint_btn {
+    font-size: 18px;
+  }
+
+  .pdrive_page_sound img,
+  .pdrive_page_social img {
+    width: 60px;
+    height: auto;
+  }
+}
+
+@media only screen and (width > 991px) and (width < 1200px) {
+
+  .font_style_1,
+  .cnt_wallet_adr {
+    font-size: 24px;
+  }
+
+  .pdrive_logo_src img {
+    width: 55px;
+    height: auto;
+  }
+
+
+
+
+
+  .mint_btn {
+    font-size: 20px;
+  }
+
+  .pdrive_page_sound img,
+  .pdrive_page_social img {
+    width: 70px;
+    height: auto;
+  }
+}
+
+@media only screen and (width > 1500px) {
+
+  .pdrive_hero_section {
+    min-height: unset;
+    height: calc(100vh - 100px);
+    max-height: 1024px;
+  }
+}
+
+@media only screen and (width < 768px) {
   .eye_icon_size {
     width: 14px;
   }
@@ -365,72 +432,5 @@ a.cnt_walet_text:hover {
   .pdrive_page_social img {
     width: 45px;
     height: auto;
-  }
-}
-
-
-@media (width > 767px) and (width < 992px) {
-
-  .font_style_1,
-  .cnt_wallet_adr {
-    font-size: 20px;
-  }
-
-  .pdrive_logo_src {
-    padding: 8px 22px;
-  }
-
-  .pdrive_logo_src img {
-    width: 45px;
-    height: auto;
-  }
-
-
-
-
-  .mint_btn {
-    font-size: 18px;
-  }
-
-  .pdrive_page_sound img,
-  .pdrive_page_social img {
-    width: 60px;
-    height: auto;
-  }
-}
-
-@media (width > 991px) and (width < 1200px) {
-
-  .font_style_1,
-  .cnt_wallet_adr {
-    font-size: 24px;
-  }
-
-  .pdrive_logo_src img {
-    width: 55px;
-    height: auto;
-  }
-
-
-
-
-
-  .mint_btn {
-    font-size: 20px;
-  }
-
-  .pdrive_page_sound img,
-  .pdrive_page_social img {
-    width: 70px;
-    height: auto;
-  }
-}
-
-@media (width > 1500px) {
-
-  .pdrive_hero_section {
-    min-height: unset;
-    height: calc(100vh - 100px);
-    max-height: 1024px;
   }
 }
