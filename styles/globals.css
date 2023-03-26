@@ -49,7 +49,7 @@ svg {
   overflow: hidden;
 }
 
-@media (width < 768px) {
+@media only screen and (width < 768px) {
 
   .progressbar_width,
   .progressbar_inner_bg {

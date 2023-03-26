@@ -7,6 +7,7 @@ import mainLogo from "../public/images/pdrive-main-logo.png";
 import mainLogoM from "../public/images/pdrive-main-logo-m.png";
 import eyeShut from "../public/images/eye-shut.svg";
 import eyeOpen from "../public/images/eye-open.svg";
+import "../styles/Home.module.css";
 
 export default function Home() {
   const [passcode, setPasscode] = useState("");

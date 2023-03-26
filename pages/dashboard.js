@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Dialog } from "@headlessui/react";
 import Link from "next/link";
+
 import styles from "../styles/Home.module.css";
 import mintUpimg from "../public/images/mint-up.svg";
 import mintDownimg from "../public/images/mint-down.svg";
@@ -27,6 +28,8 @@ import CmContract from "../contract/PepeDrive.json";
 import { CONTRACTS } from "../config/ContractEnum";
 import { ethers } from "ethers";
 import ToastMessage from "../components/ErrorAlert";
+
+import "../styles/Home.module.css";
 
 export default function Dashboard() {
   const [showSound, setSound] = useState(false);
@@ -273,7 +276,7 @@ export default function Dashboard() {
                 alt="Logo"
               />
             </span>
-            <span className={styles.showinmobile_f}>
+            <span className="showinmobile_f">
               <Image
                 className={styles.main_logo_pepe}
                 src={mainLogoM}
