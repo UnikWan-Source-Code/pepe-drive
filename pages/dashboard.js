@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Dialog } from "@headlessui/react";
 import Link from "next/link";
+import Head from "next/head";
+
 import styles from "../styles/Home.module.css";
 import mintUpimg from "../public/images/mint-up.svg";
 import mintDownimg from "../public/images/mint-down.svg";
@@ -219,6 +221,10 @@ export default function Dashboard() {
 
   return (
     <>
+      <Head>
+        <title>Pepe Drive Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <main className={styles.pdrive_landing_page}>
         <div className={styles.pdrive_hero_section}>
           <div className={styles.pdrive_page_top}>
