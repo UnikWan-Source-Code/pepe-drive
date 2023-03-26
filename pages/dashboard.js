@@ -2,7 +2,7 @@ import Image from "next/image";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Dialog } from '@headlessui/react';
+import { Dialog } from "@headlessui/react";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import mintUpimg from "../public/images/mint-up.svg";
@@ -14,11 +14,19 @@ import soundOn from "../public/images/sound-on.svg";
 import soundOff from "../public/images/sound-off.svg";
 import twitterLogo from "../public/images/twitter-logo.svg";
 import PriceDetails from "../components/PriceDetails";
-import { useConnect, useAccount, connectors, useContractReads, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
-import CmContract from '../contract/PepeDrive.json';
-import { CONTRACTS } from '../config/ContractEnum';
-import { ethers } from 'ethers';
-import ToastMessage from '../components/ErrorAlert';
+import {
+  useConnect,
+  useAccount,
+  connectors,
+  useContractReads,
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
+import CmContract from "../contract/PepeDrive.json";
+import { CONTRACTS } from "../config/ContractEnum";
+import { ethers } from "ethers";
+import ToastMessage from "../components/ErrorAlert";
 
 export default function Dashboard() {
   const [showSound, setSound] = useState(false);
@@ -31,21 +39,18 @@ export default function Dashboard() {
   const [listingPrice, setListingPrice] = useState(ethers.BigNumber.from(0));
   const [alreadyMinted, setAlreadyMinted] = useState(0);
   const [connected, setConnected] = useState(false);
-  const [proof, setProof] = useState([])
-
-
+  const [proof, setProof] = useState([]);
 
   const router = useRouter();
   const { connect, connectors, error, isLoading, pendingConnector } =
     useConnect();
 
-  const { address, isConnecting, isDisconnected, isConnected } = useAccount()
+  const { address, isConnecting, isDisconnected, isConnected } = useAccount();
 
   const cmContract = {
     address: CONTRACTS.MAINNET,
     abi: CmContract.abi,
   };
-
 
   const {
     config,
@@ -55,7 +60,7 @@ export default function Dashboard() {
     address: CONTRACTS.MAINNET,
     abi: CmContract.abi,
 
-    functionName: 'mint',
+    functionName: "mint",
     args: [showNum, proof],
     overrides: {
       value: listingPrice.mul(showNum),
@@ -63,42 +68,38 @@ export default function Dashboard() {
   });
   const { data, write, error: writeError } = useContractWrite(config);
 
+  const { isLoading: transactionLoading, isSuccess: transactionSuccess } =
+    useWaitForTransaction({
+      hash: data?.hash,
 
-
-  const { isLoading: transactionLoading, isSuccess: transactionSuccess } = useWaitForTransaction({
-    hash: data?.hash,
-
-    onSuccess() {
-      console.log("success!")
-    },
-  });
+      onSuccess() {
+        console.log("success!");
+      },
+    });
 
   const parseErrorMessage = (error) => {
     const parsed = JSON.parse(JSON.stringify(error)).reason;
     console.log(parsed);
 
-    if (parsed === 'execution reverted: token limit per wallet reached') {
-      return "TOKEN LIMIT REACHED"
+    if (parsed === "execution reverted: token limit per wallet reached") {
+      return "TOKEN LIMIT REACHED";
     }
 
-    if (parsed === 'insufficient funds for intrinsic transaction cost') {
-      return 'YOU NEED MORE ETH';
+    if (parsed === "insufficient funds for intrinsic transaction cost") {
+      return "YOU NEED MORE ETH";
     }
     if (parsed == "execution reverted: Mint not started, yet") {
-      return "MINT NOT OPEN"
+      return "MINT NOT OPEN";
     }
     if (parsed == "execution reverted: Mint is over") {
-      return "MINT IS OVER"
+      return "MINT IS OVER";
     }
     if (parsed == "execution reverted: Invalid proof") {
-      return "NOT WHITELISTED. SAD."
+      return "NOT WHITELISTED. SAD.";
     }
 
     return JSON.parse(JSON.stringify(error)).reason;
-
   };
-
-
 
   useEffect(() => {
     // console.log(isError);
@@ -107,23 +108,18 @@ export default function Dashboard() {
     }
   }, [isError]);
 
-
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(`/api/merkle`, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify({ input: address }),
       });
       const { proof, root } = await response.json();
-      console.log('proof: ', proof);
+      console.log("proof: ", proof);
       setProof(proof);
     }
     fetchData();
   }, [address]);
-
-
-
-
 
   useEffect(() => {
     setConnected(isConnected);
@@ -135,8 +131,7 @@ export default function Dashboard() {
   const connectWallet = (e) => {
     e.preventDefault();
     setConnection("connecting");
-    setOpen(true)
-
+    setOpen(true);
   };
 
   useEffect(() => {
@@ -145,7 +140,7 @@ export default function Dashboard() {
       setConnection("connected");
       setOpen(false);
     }
-  }, [isConnected])
+  }, [isConnected]);
 
   // const mintNow = () => {
   //   if (showNum > 0) {
@@ -157,10 +152,6 @@ export default function Dashboard() {
   //   }
   // };
 
-
-
-
-
   const {
     data: readData,
     isError: isReadError,
@@ -171,27 +162,23 @@ export default function Dashboard() {
     contracts: [
       {
         ...cmContract,
-        functionName: 'saleIsActive',
+        functionName: "saleIsActive",
       },
 
       {
         ...cmContract,
-        functionName: 'listingPrice',
+        functionName: "listingPrice",
       },
       {
         ...cmContract,
-        functionName: 'totalSupply',
+        functionName: "totalSupply",
       },
-
-
     ],
-
   });
-
 
   useEffect(() => {
     //console.log("read data: ", readData);
-    if (typeof readData !== 'undefined') {
+    if (typeof readData !== "undefined") {
       if (readData[0] != null) {
         console.log(readData);
         setSaleActive(Boolean(readData[0]));
@@ -205,14 +192,8 @@ export default function Dashboard() {
       if (readData[3] != null && readData[4] != null) {
         setWalletLimit(Number(readData[3]) - Number(readData[4]));
       }
-
-
     }
   }, [readData]);
-
-
-
-
 
   const togglePlay = () => {
     var audio = document.getElementById("audio");
@@ -227,7 +208,6 @@ export default function Dashboard() {
   };
 
   const incCount = () => {
-
     setNum(showNum + 1);
   };
 
@@ -240,54 +220,6 @@ export default function Dashboard() {
   return (
     <>
       <main className={styles.pdrive_landing_page}>
-        <Dialog
-          as="div"
-          className=" z-40  fixed inset-0"
-          open={open}
-          onClose={() => setOpen(false)}
-        >
-          <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-          <div className="fixed inset-0 flex items-center justify-around p-4">
-            <Dialog.Panel className="w-full max-w-sm rounded bg-black text-white text-center border-2 border-black p-8">
-              <Dialog.Title className="text-2xl font-bold pb-4">
-                CONNECT WALLET
-              </Dialog.Title>
-              <Dialog.Description>
-                Please connect one of your wallets to mint a NFT.
-              </Dialog.Description>
-              <div className="flex flex-col pt-8">
-                {connectors.map((connector) => (
-                  <div key={connector.id}>
-                    <button
-                      className="px-3 py-2 w-3/4 text-white text-lg font-medium hover:text-black hover:bg-amber-400 cursor-pointer text-nav_font_active"
-                      key={connector.id}
-                      onClick={() => connect({ connector })}
-                    >
-                      <div className="flex flex-row items-center justify-start">
-                        <div className="">
-                          <Image
-                            src={`/images/${connector.id}.svg`}
-                            alt={connector.name}
-                            height={32}
-                            width={32}
-                          />
-                        </div>
-                        <div className="ml-2">
-                          {connector.name}
-                          {!connector.ready}
-                          {isLoading && connector.id === pendingConnector?.id}
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                ))}
-
-              </div>
-
-
-            </Dialog.Panel>
-          </div>
-        </Dialog>
         <div className={styles.pdrive_hero_section}>
           <div className={styles.pdrive_page_top}>
             <div className={styles.pdrive_logo_box}>
@@ -317,7 +249,8 @@ export default function Dashboard() {
                     <article
                       className={`${styles.font_style_1} ${styles.cnt_wallet_adr} `}
                     >
-                      {isConnected && (address?.slice(0, 6) + '...' + address?.slice(38, 42))}
+                      {isConnected &&
+                        address?.slice(0, 6) + "..." + address?.slice(38, 42)}
                     </article>
                     <span className={styles.showinmobile}>
                       <PriceDetails showWallet={showWallet} />
@@ -360,10 +293,9 @@ export default function Dashboard() {
               ) : showWallet == true ? (
                 <>
                   <div>
-                    <div className={`${styles.mb} ${styles.count_flex}`} >
-                      <div className={styles.arrow_flex} >
+                    <div className={`${styles.mb} ${styles.count_flex}`}>
+                      <div className={styles.arrow_flex}>
                         <span
-
                           onClick={() => {
                             incCount();
                           }}
@@ -378,8 +310,7 @@ export default function Dashboard() {
                         <div className="p-[1px]"></div>
                         <span
                           onClick={() => {
-                            if (showNum > 1)
-                              decCount();
+                            if (showNum > 1) decCount();
                           }}
                         >
                           <Image
@@ -390,9 +321,14 @@ export default function Dashboard() {
                           />
                         </span>
                       </div>
-                      {prepareError ? <div className={`${styles.font_style_1}`}> {parseErrorMessage(prepareError).toUpperCase().replace(/EXECUTION REVERTED:/g, "")}</div> : (
-
-
+                      {prepareError ? (
+                        <div className={`${styles.font_style_1}`}>
+                          {" "}
+                          {parseErrorMessage(prepareError)
+                            .toUpperCase()
+                            .replace(/EXECUTION REVERTED:/g, "")}
+                        </div>
+                      ) : (
                         <article className={`${styles.font_style_1}`}>
                           <span id="count">{showNum ? showNum : "0"}</span>{" "}
                           <span
@@ -403,7 +339,9 @@ export default function Dashboard() {
                           >
                             MINT NOW
                           </span>{" "}
-                          {(ethers.utils.formatEther(listingPrice) * showNum).toFixed(3)}
+                          {(
+                            ethers.utils.formatEther(listingPrice) * showNum
+                          ).toFixed(3)}
                         </article>
                       )}
                     </div>
@@ -413,7 +351,6 @@ export default function Dashboard() {
                       </article>
                     </div>
                   </div>
-
                 </>
               ) : (
                 <article className={`${styles.font_style_1}`}>
@@ -426,7 +363,7 @@ export default function Dashboard() {
             <div className={styles.pdrive_page_sound}>
               <audio id="audio" preload="auto" loop>
                 <source
-                  src="https://www.unikwan.com/projects/2023/pepe-drive/pepe_drip.mp3"
+                  src="https://dl.sndup.net/mvv7/pepedrive_drip.mp3"
                   type="audio/mp3"
                 />
                 Your browser does not support the audio element.
@@ -473,9 +410,7 @@ export default function Dashboard() {
               ) : (
                 <article
                   className={`${styles.mint_status_text} ${styles.font_style_1}`}
-                >
-
-                </article>
+                ></article>
               )}
               <ProgressBar
                 className={"progressbar_border"}
@@ -489,8 +424,8 @@ export default function Dashboard() {
                     ? 100
                     : showConnection == "connected" ||
                       showConnection == "minted"
-                      ? 0
-                      : 0
+                    ? 0
+                    : 0
                 }
                 transitionDuration={
                   showConnection == "connected" || showConnection == "minted"
@@ -509,6 +444,51 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+        <Dialog
+          as="div"
+          className=" z-40  fixed inset-0"
+          open={open}
+          onClose={() => setOpen(false)}
+        >
+          <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+          <div className="fixed inset-0 flex items-center justify-around p-4">
+            <Dialog.Panel className="w-full max-w-sm rounded bg-black text-white text-center border-2 border-black p-8">
+              <Dialog.Title className="text-2xl font-bold pb-4">
+                CONNECT WALLET
+              </Dialog.Title>
+              <Dialog.Description>
+                Please connect one of your wallets to mint a NFT.
+              </Dialog.Description>
+              <div className="flex flex-col pt-8">
+                {connectors.map((connector) => (
+                  <div key={connector.id}>
+                    <button
+                      className="px-3 py-2 w-3/4 text-white text-lg font-medium hover:text-black hover:bg-amber-400 cursor-pointer text-nav_font_active"
+                      key={connector.id}
+                      onClick={() => connect({ connector })}
+                    >
+                      <div className="flex flex-row items-center justify-start">
+                        <div className="">
+                          <Image
+                            src={`/images/${connector.id}.svg`}
+                            alt={connector.name}
+                            height={32}
+                            width={32}
+                          />
+                        </div>
+                        <div className="ml-2">
+                          {connector.name}
+                          {!connector.ready}
+                          {isLoading && connector.id === pendingConnector?.id}
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </Dialog.Panel>
+          </div>
+        </Dialog>
       </main>
     </>
   );

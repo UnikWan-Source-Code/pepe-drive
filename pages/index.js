@@ -84,7 +84,7 @@ export default function Home() {
                   <input
                     onChange={(e) => setPasscode(e.target.value)}
                     type={viewPwd ? "text" : "password"}
-                    maxlength="12"
+                    maxLength="12"
                     className={`${styles.login_input_elemnt} ${styles.font_style_1}`}
                   />
                   <Image
@@ -94,13 +94,13 @@ export default function Home() {
                     className={styles.cursor}
                     src={viewPwd ? eyeShut : eyeOpen}
                     alt="eye"
-                    width={30}
-                    height={15}
+                    width="30px"
+                    height="15px"
                   />
                 </div>
               </div>
 
-              <div style={{ minHeight: "30px" }}>
+              <div style={{ minHeight: "45px" }}>
                 {allow ? (
                   <div
                     onClick={() => handleLogin()}

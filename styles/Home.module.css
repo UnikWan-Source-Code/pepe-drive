@@ -14,7 +14,7 @@
 .pdrive_landing_page {
   background-color: #0d0c0c;
   padding: 45px;
-  min-height: calc(100vh - 90px);
+  min-height: calc(100vh);
   display: flex;
   align-items: center;
 }
@@ -106,7 +106,7 @@ a.cnt_walet_text:hover {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  width: calc(100% - 60px);
+  width: calc(100%);
   padding: 30px;
 }
 
@@ -253,7 +253,7 @@ a.cnt_walet_text:hover {
   }
 
   .login_input_box {
-    padding: 17px 20px;
+    padding: 15px 20px;
     margin: 20px auto;
   }
 
@@ -356,7 +356,7 @@ a.cnt_walet_text:hover {
 
   .pdrive_page_bottom {
     padding: 15px;
-    width: calc(100% - 30px);
+    width: calc(100%);
   }
 
   .pdrive_page_sound img,
