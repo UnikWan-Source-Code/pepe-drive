@@ -240,7 +240,9 @@ a.cnt_walet_text:hover {
 }
 
 @media (width < 768px) {
-
+  .eye_icon_size {
+    width: 14px;
+  }
 
   .login_input_elemnt {
     width: 100%;

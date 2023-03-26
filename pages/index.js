@@ -88,10 +88,10 @@ export default function Home() {
                     className={`${styles.login_input_elemnt} ${styles.font_style_1}`}
                   />
                   <Image
+                    className={`${styles.eye_icon_size} ${styles.cursor}`}
                     onClick={() => {
                       setViewPwd(!viewPwd);
                     }}
-                    className={styles.cursor}
                     src={viewPwd ? eyeShut : eyeOpen}
                     alt="eye"
                     width="30px"
