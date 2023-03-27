@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { Dialog } from "@headlessui/react";
 import Link from "next/link";
 import Head from "next/head";
-
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import styles from "../styles/Home.module.css";
 import mintUpimg from "../public/images/mint-up.svg";
 import mintDownimg from "../public/images/mint-down.svg";
@@ -16,6 +16,7 @@ import soundOn from "../public/images/sound-on.svg";
 import soundOff from "../public/images/sound-off.svg";
 import twitterLogo from "../public/images/twitter-logo.svg";
 import PriceDetails from "../components/PriceDetails";
+import classNames from "classnames";
 import {
   useConnect,
   useAccount,
@@ -235,7 +236,28 @@ export default function Dashboard() {
                 </div>
               </div>
               <div className={styles.cnt_wallet}>
-                {!isConnected ? (
+                <ConnectButton.Custom>
+                  {({ account, chain, openAccountModal, openConnectModal, mounted }) => {
+                    return (
+                      <div className={classNames({ hidden: !mounted })}>
+                        {(() => {
+                          if (!mounted || !account || !chain) {
+                            return (
+                              <div className={`${styles.cnt_walet_text} ${styles.font_style_1}`} onClick={openConnectModal}>CONNECT WALLET</div>
+                            );
+                          }
+
+                          return (
+                            <div className={`${styles.font_style_1} ${styles.cnt_walet_text} `} onClick={openAccountModal}>
+                              {account.displayName}
+                            </div>
+                          );
+                        })()}
+                      </div>
+                    );
+                  }}
+                </ConnectButton.Custom>
+                {/* {!isConnected ? (
                   <a
                     href=""
                     onClick={(e) => {
@@ -262,7 +284,7 @@ export default function Dashboard() {
                       <PriceDetails showWallet={showWallet} />
                     </span>
                   </>
-                )}
+                )} */}
               </div>
             </div>
             <div className={`${styles.eth_details_box}`}>
@@ -430,8 +452,8 @@ export default function Dashboard() {
                     ? 100
                     : showConnection == "connected" ||
                       showConnection == "minted"
-                    ? 0
-                    : 0
+                      ? 0
+                      : 0
                 }
                 transitionDuration={
                   showConnection == "connected" || showConnection == "minted"
@@ -450,7 +472,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <Dialog
+        {/* <Dialog
           as="div"
           className=" z-40  fixed inset-0"
           open={open}
@@ -494,7 +516,7 @@ export default function Dashboard() {
               </div>
             </Dialog.Panel>
           </div>
-        </Dialog>
+        </Dialog> */}
       </main>
     </>
   );
