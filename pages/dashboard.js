@@ -19,6 +19,8 @@ import CmContract from '../contract/PepeDrive.json';
 import { CONTRACTS } from '../config/ContractEnum';
 import { ethers } from 'ethers';
 import ToastMessage from '../components/ErrorAlert';
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import classNames from "classnames";
 
 export default function Dashboard() {
   const [showSound, setSound] = useState(false);
@@ -240,54 +242,7 @@ export default function Dashboard() {
   return (
     <>
       <main className={styles.pdrive_landing_page}>
-        <Dialog
-          as="div"
-          className=" z-40  fixed inset-0"
-          open={open}
-          onClose={() => setOpen(false)}
-        >
-          <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-          <div className="fixed inset-0 flex items-center justify-around p-4">
-            <Dialog.Panel className="w-full max-w-sm rounded bg-black text-white text-center border-2 border-black p-8">
-              <Dialog.Title className="text-2xl font-bold pb-4">
-                CONNECT WALLET
-              </Dialog.Title>
-              <Dialog.Description>
-                Please connect one of your wallets to mint a NFT.
-              </Dialog.Description>
-              <div className="flex flex-col pt-8">
-                {connectors.map((connector) => (
-                  <div key={connector.id}>
-                    <button
-                      className="px-3 py-2 w-3/4 text-white text-lg font-medium hover:text-black hover:bg-amber-400 cursor-pointer text-nav_font_active"
-                      key={connector.id}
-                      onClick={() => connect({ connector })}
-                    >
-                      <div className="flex flex-row items-center justify-start">
-                        <div className="">
-                          <Image
-                            src={`/images/${connector.id}.svg`}
-                            alt={connector.name}
-                            height={32}
-                            width={32}
-                          />
-                        </div>
-                        <div className="ml-2">
-                          {connector.name}
-                          {!connector.ready}
-                          {isLoading && connector.id === pendingConnector?.id}
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                ))}
 
-              </div>
-
-
-            </Dialog.Panel>
-          </div>
-        </Dialog>
         <div className={styles.pdrive_hero_section}>
           <div className={styles.pdrive_page_top}>
             <div className={styles.pdrive_logo_box}>
@@ -297,7 +252,28 @@ export default function Dashboard() {
                 </div>
               </div>
               <div className={styles.cnt_wallet}>
-                {!isConnected ? (
+                <ConnectButton.Custom>
+                  {({ account, chain, openAccountModal, openConnectModal, mounted }) => {
+                    return (
+                      <div className={classNames({ hidden: !mounted })}>
+                        {(() => {
+                          if (!mounted || !account || !chain) {
+                            return (
+                              <div className={`${styles.cnt_walet_text} ${styles.font_style_1}`} onClick={openConnectModal}>CONNECT WALLET</div>
+                            );
+                          }
+
+                          return (
+                            <div className={`${styles.font_style_1} ${styles.cnt_walet_text} `} onClick={openAccountModal}>
+                              {account.displayName}
+                            </div>
+                          );
+                        })()}
+                      </div>
+                    );
+                  }}
+                </ConnectButton.Custom>
+                {/* {!isConnected ? (
                   <a
                     href=""
                     onClick={(e) => {
@@ -323,7 +299,7 @@ export default function Dashboard() {
                       <PriceDetails showWallet={showWallet} />
                     </span>
                   </>
-                )}
+                )} */}
               </div>
             </div>
             <div className={`${styles.eth_details_box}`}>

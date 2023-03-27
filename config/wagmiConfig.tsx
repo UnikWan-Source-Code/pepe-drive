@@ -3,10 +3,8 @@ import { WagmiConfig, createClient, configureChains } from 'wagmi';
 import { mainnet, goerli } from 'wagmi/chains'
 import { infuraProvider } from 'wagmi/providers/infura';
 import { publicProvider } from 'wagmi/providers/public';
+import { connectorsForWallets, getDefaultWallets } from '@rainbow-me/rainbowkit';
 
-import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
 const { chains, webSocketProvider, provider } = configureChains(
     [goerli, mainnet],
@@ -17,24 +15,24 @@ const { chains, webSocketProvider, provider } = configureChains(
 );
 
 
+
+export const rainbowChains = chains;
+
+const { wallets } = getDefaultWallets({
+    appName: "PepeDriveII",
+    chains,
+});
+const connectors = connectorsForWallets([...wallets]);
+
+
+
 export const client = createClient({
     autoConnect: false,
-    connectors: [
-        new MetaMaskConnector({ chains }),
-        new CoinbaseWalletConnector({
-            chains,
-            options: {
-                appName: 'wagmi',
-            },
-        }),
-        new WalletConnectConnector({
-            chains,
-            options: {
-                projectId: "300097ffe5523ee201b113c1af4c9295",
-                showQrModal: true,
-            },
-        }),
-    ],
+    connectors,
     provider,
     webSocketProvider,
+
 });
+
+
+
