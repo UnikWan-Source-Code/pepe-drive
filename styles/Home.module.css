@@ -240,7 +240,7 @@ a.cnt_walet_text:hover {
 }
 
 
-@media only screen and (width > 767px) and (width < 992px) {
+@media only screen and (min-width: 767px) and (max-width: 992px) {
 
   .font_style_1,
   .cnt_wallet_adr {
@@ -270,7 +270,8 @@ a.cnt_walet_text:hover {
   }
 }
 
-@media only screen and (width > 991px) and (width < 1200px) {
+
+@media only screen and (min-width: 991px) and (max-width: 1200px) {
 
   .font_style_1,
   .cnt_wallet_adr {
@@ -297,7 +298,8 @@ a.cnt_walet_text:hover {
   }
 }
 
-@media only screen and (width > 1500px) {
+@media only screen and (min-width: 1500px) {
+
 
   .pdrive_hero_section {
     min-height: unset;
@@ -306,7 +308,7 @@ a.cnt_walet_text:hover {
   }
 }
 
-@media only screen and (width < 768px) {
+@media only screen and (max-width: 768px) {
   .eye_icon_size {
     width: 14px;
   }
