@@ -5,8 +5,9 @@ import { ToastContainer } from "react-toastify";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import { client, rainbowChains } from "../config/wagmiConfig";
+import { ActionProvider } from "../hooks/useActions";
 
 export default function App({ Component, pageProps }) {
-  return (<WagmiConfig client={client}><RainbowKitProvider modalSize="compact" chains={rainbowChains}><Component {...pageProps} /></RainbowKitProvider></WagmiConfig>
+  return (<WagmiConfig client={client}> <ActionProvider><RainbowKitProvider modalSize="compact" chains={rainbowChains}><Component {...pageProps} /></RainbowKitProvider></ActionProvider></WagmiConfig >
   );
 }

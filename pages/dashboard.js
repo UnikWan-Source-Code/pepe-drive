@@ -51,7 +51,7 @@ export default function Dashboard() {
   const { address, isConnecting, isDisconnected, isConnected } = useAccount();
 
   const cmContract = {
-    address: CONTRACTS.MAINNET,
+    address: CONTRACTS.PEPE_DRIVE,
     abi: CmContract.abi,
   };
 
@@ -60,7 +60,7 @@ export default function Dashboard() {
     error: prepareError,
     isError,
   } = usePrepareContractWrite({
-    address: CONTRACTS.MAINNET,
+    address: CONTRACTS.PEPE_DRIVE,
     abi: CmContract.abi,
 
     functionName: "mint",
