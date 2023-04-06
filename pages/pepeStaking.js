@@ -4,16 +4,27 @@ import CheckDiscFreeMintable from "../components/stakingComponents/discs/CheckDi
 import MintDiscForFree from "../components/stakingComponents/discs/MintDiscForFree"
 import MintDiscPayed from "../components/stakingComponents/discs/MintDiscPayed"
 import CheckDiscLevel from "../components/stakingComponents/discs/CheckDiscLevel"
+import CheckPepeBalance from "../components/stakingComponents/staking/CheckPepeBalance"
+import CheckStakedDriveOwner from "../components/stakingComponents/staking/CheckStakedDriveOwner"
+import StakeDrive from "../components/stakingComponents/staking/StakeDrive"
+import StakeDisc from "../components/stakingComponents/staking/StakeDisc"
+import UnStakeDisc from "../components/stakingComponents/staking/UnStakeDisc"
+import UnStakeDrive from "../components/stakingComponents/staking/UnStakeDrive"
+import ShowAllStakedTokens from "../components/stakingComponents/staking/ShowAllStakedTokens"
+
+
+
 import {
     useAccount
 } from "wagmi";
 import useIsSSR from "../hooks/SSRHook";
 import { useState, useEffect } from "react";
 import { useActions } from "../hooks/useActions";
+import styles from "../styles/Home.module.css";
 
 
 
-export default function pepeDiscs() {
+export default function Staking() {
     const { address, isConnecting, isDisconnected, isConnected } = useAccount();
     const { currentOwner, setCurrentOwner } = useActions();
 
@@ -32,15 +43,24 @@ export default function pepeDiscs() {
         <>
             <div className="flex flex-col justify-center items-center space-y-16">
 
-                <div className="text-7xl">DISC CONTRACT INTERACTION</div>
+                <div className="text-7xl">STAKING CONTRACT INTERACTION</div>
 
                 {isConnected && <div>  {address}
                 </div>}
-                <CheckDiscFreeMintable />
+
+                <CheckPepeBalance />
+                <ShowAllStakedTokens />
+                <CheckStakedDriveOwner />
+                <StakeDrive />
+                <StakeDisc />
+                <CheckDiscLevel />
+                <UnStakeDisc />
+                <UnStakeDrive />
+                {/* <CheckDiscFreeMintable />
                 {(address == currentOwner) && <MintDiscForFree />}
                 <MintDiscPayed />
 
-                <CheckDiscLevel />
+                <CheckDiscLevel /> */}
 
             </div>
 

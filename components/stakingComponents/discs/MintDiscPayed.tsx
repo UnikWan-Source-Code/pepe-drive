@@ -6,23 +6,22 @@ import {
     useWaitForTransaction,
 } from "wagmi";
 import { useState, useEffect } from "react";
-import PEPE_DRIVE_CONTRACT from "../../contract/PepeDrive.json";
-import PEPE_DISC_CONTRACT from "../../contract/PepeDisc.json";
-import PEPE_STAKING_CONTRACT from "../../contract/PepeStaking.json";
-import CHARACTER_CONTRACT from "../../contract/Character.json";
-import { CONTRACTS } from "../../config/ContractEnum";
-import { useActions } from "../../hooks/useActions";
-import styles from "../../styles/Home.module.css";
+import PEPE_DRIVE_CONTRACT from "../../../contract/PepeDrive.json";
+import PEPE_DISC_CONTRACT from "../../../contract/PepeDisc.json";
+import PEPE_STAKING_CONTRACT from "../../../contract/PepeStaking.json";
+import CHARACTER_CONTRACT from "../../../contract/Character.json";
+import { CONTRACTS } from "../../../config/ContractEnum";
+import { useActions } from "../../../hooks/useActions";
+import styles from "../../../styles/Home.module.css";
+import { ethers } from "ethers";
 
-export default function MintDiscForFree() {
+export default function MintDiscPayed() {
 
     const { address, isConnecting, isDisconnected, isConnected } = useAccount();
-    const [driveID, setDriveID] = useState();
-
-
     const [amount, setAmount] = useState(1);
     const { freeMintDisc, setFreeMintDisc } = useActions();
     const { driveToQuery, setDriveToQuery } = useActions();
+    const [price, setPrice] = useState(ethers.BigNumber.from(0));
 
 
     const parseErrorMessage = (error) => {
@@ -49,6 +48,22 @@ export default function MintDiscForFree() {
         return JSON.parse(JSON.stringify(error)).reason;
     };
 
+    const { data: listingPrice } = useContractRead({
+        address: CONTRACTS.PEPE_DISC,
+        abi: PEPE_DISC_CONTRACT.abi,
+        functionName: 'listingPrice',
+    })
+
+
+
+    useEffect(() => {
+        //console.log("read data: ", readData);
+        if (typeof listingPrice !== "undefined") {
+
+            setPrice(ethers.BigNumber.from(listingPrice))
+        }
+
+    }, [listingPrice]);
 
 
     const {
@@ -58,8 +73,11 @@ export default function MintDiscForFree() {
     } = usePrepareContractWrite({
         address: CONTRACTS.PEPE_DISC,
         abi: PEPE_DISC_CONTRACT.abi,
-        functionName: "mintFreeWithDrive",
-        args: [amount, driveToQuery],
+        functionName: "mintPayed",
+        args: [amount],
+        overrides: {
+            value: price.mul(amount),
+        },
 
     });
     const { data, write, error: writeError } = useContractWrite(config);
@@ -83,9 +101,8 @@ export default function MintDiscForFree() {
 
 
     const handleIncrement = () => {
-        if (amount < freeMintDisc) {
-            setAmount(amount + 1);
-        }
+        setAmount(amount + 1);
+
     };
 
     const handleDecrement = () => {
@@ -104,7 +121,7 @@ export default function MintDiscForFree() {
         <>
             <div className="flex flex-col items-center">
                 <label htmlFor="amount" className="text-lg font-medium mb-2">
-                    You can mint {freeMintDisc.toString()} for this drive for free:
+                    You can mint for {ethers.utils.formatEther(price.mul(amount))}:
                 </label>
                 <div className="flex items-center mb-4">
                     <button

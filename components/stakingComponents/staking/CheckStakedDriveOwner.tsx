@@ -3,75 +3,47 @@ import {
     useContractRead,
 } from "wagmi";
 import { useState, useEffect } from "react";
-import PEPE_DRIVE_CONTRACT from "../../contract/PepeDrive.json";
-import PEPE_DISC_CONTRACT from "../../contract/PepeDisc.json";
-import PEPE_STAKING_CONTRACT from "../../contract/PepeStaking.json";
-import CHARACTER_CONTRACT from "../../contract/Character.json";
-import { CONTRACTS } from "../../config/ContractEnum";
-import { useActions } from "../../hooks/useActions";
+import PEPE_DRIVE_CONTRACT from "../../../contract/PepeDrive.json";
+import PEPE_DISC_CONTRACT from "../../../contract/PepeDisc.json";
+import PEPE_STAKING_CONTRACT from "../../../contract/PepeStaking.json";
+import CHARACTER_CONTRACT from "../../../contract/Character.json";
+import { CONTRACTS } from "../../../config/ContractEnum";
+import { useActions } from "../../../hooks/useActions";
 
-export default function CheckDiscsFreeMintable() {
+export default function CheckStakedDriveOwner() {
 
     const { address, isConnecting, isDisconnected, isConnected } = useAccount();
     const [driveID, setDriveID] = useState();
     const { driveToQuery, setDriveToQuery } = useActions();
+
+    const { stakingDriveOwner, setStakingDriveOwner } = useActions();
 
     const { currentOwner, setCurrentOwner } = useActions();
 
     const { freeMintDisc, setFreeMintDisc } = useActions();
 
 
-    const { data, isError, error, isLoading, } = useContractRead({
-        address: CONTRACTS.PEPE_DISC,
-        abi: PEPE_DISC_CONTRACT.abi,
-        functionName: 'checkFreePerDriveID',
-        args: [driveToQuery],
 
-    })
 
     const { data: owner, isError: isReadOwnerError, error: readOwnerError } = useContractRead({
-        address: CONTRACTS.PEPE_DRIVE,
-        abi: PEPE_DRIVE_CONTRACT.abi,
-        functionName: 'ownerOf',
+        address: CONTRACTS.PEPE_STAKING,
+        abi: PEPE_STAKING_CONTRACT.abi,
+        functionName: 'ownerOfDrive',
         args: [driveToQuery],
 
     })
 
     useEffect(() => {
-        console.log(error)
-    }, [isError])
-
-    const pepeDriveContract = {
-        address: CONTRACTS.PEPE_DRIVE,
-        abi: PEPE_DRIVE_CONTRACT.abi,
-    };
-
-    const pepeDiscContract = {
-        address: CONTRACTS.PEPE_DISC,
-        abi: PEPE_DISC_CONTRACT.abi,
-    };
-
-    const pepeStakingContract = {
-        address: CONTRACTS.PEPE_STAKING,
-        abi: PEPE_STAKING_CONTRACT.abi,
-    };
-
-    const characterContract = {
-        address: CONTRACTS.CHARACTER,
-        abi: CHARACTER_CONTRACT.abi,
-    };
+        console.log(readOwnerError)
+    }, [isReadOwnerError])
 
 
     useEffect(() => {
-        console.log(data)
-        if (data != undefined && owner != undefined) {
-            setFreeMintDisc(Number(data));
-            console.log("result: ", data)
-            console.log("owner: ", owner)
-            setCurrentOwner(owner.toString());
+        if (owner != undefined) {
+            setStakingDriveOwner(String(owner));
         }
 
-    }, [data, owner])
+    }, [owner])
 
     const handleInputChange = (event) => {
         setDriveID(event.target.value);
@@ -107,8 +79,9 @@ export default function CheckDiscsFreeMintable() {
                     </button>
                 </div>
             </form>
-            <div>This drive has {freeMintDisc != undefined ? freeMintDisc.toString() : "0"} mints left.</div>
-            <div>The current owner is {currentOwner != undefined && currentOwner}.</div>
+
+            {stakingDriveOwner != undefined ? (
+                <div>This staked drive is owned by  {stakingDriveOwner.toString()}</div>) : (<div> DRIVE NOT STAKED </div>)}
 
 
         </>
