@@ -12,6 +12,11 @@ import UnStakeDisc from "../components/stakingComponents/staking/UnStakeDisc"
 import UnStakeDrive from "../components/stakingComponents/staking/UnStakeDrive"
 import ShowAllStakedTokens from "../components/stakingComponents/staking/ShowAllStakedTokens"
 import PrepareMint from "../components/stakingComponents/breeding/PrepareMint"
+import GetAllCharacters from "../components/stakingComponents/breeding/GetAllCharacters"
+import MintCharacter from "../components/stakingComponents/breeding/MintCharacter"
+
+
+
 
 
 
@@ -52,6 +57,8 @@ export default function Staking() {
                 <CheckPepeBalance />
                 <CheckDiscLevel />
                 <PrepareMint />
+                <GetAllCharacters />
+                <MintCharacter />
 
 
             </div>

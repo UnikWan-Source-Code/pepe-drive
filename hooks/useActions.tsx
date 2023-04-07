@@ -20,6 +20,8 @@ interface IActionContext {
     setStakingDriveOwner: Dispatch<SetStateAction<string>>;
     setRefetchDisc: Dispatch<SetStateAction<boolean>>;
     setRefetchStake: Dispatch<SetStateAction<boolean>>;
+    setRefetchBreeding: Dispatch<SetStateAction<boolean>>;
+    refetchBreeding: boolean;
     refetchStake: boolean;
     refetchDisc: boolean;
     stakingDriveOwner: string;
@@ -45,6 +47,7 @@ export function ActionProvider({ children }: Props) {
     const [balancePepe, setBalancePepe] = useState(ethers.BigNumber.from(0));
     const [refetchDisc, setRefetchDisc] = useState(false);
     const [refetchStake, setRefetchStake] = useState(false);
+    const [refetchBreeding, setRefetchBreeding] = useState(false);
 
     const providerValues: IActionContext = useMemo(
         () => ({
@@ -55,6 +58,8 @@ export function ActionProvider({ children }: Props) {
             stakingDriveOwner,
             refetchDisc,
             refetchStake,
+            refetchBreeding,
+            setRefetchBreeding,
             setRefetchStake,
             setRefetchDisc,
             setDriveToQuery,
@@ -64,7 +69,7 @@ export function ActionProvider({ children }: Props) {
             setStakingDriveOwner
 
         }),
-        [freeMintDisc, currentOwner, driveToQuery, balancePepe, stakingDriveOwner, refetchDisc, refetchStake]
+        [freeMintDisc, currentOwner, driveToQuery, balancePepe, stakingDriveOwner, refetchDisc, refetchStake, refetchBreeding]
     );
 
     return (

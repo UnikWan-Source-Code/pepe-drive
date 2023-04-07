@@ -15,54 +15,15 @@ import { useActions } from "../../../hooks/useActions";
 import styles from "../../../styles/Home.module.css";
 import { ethers } from "ethers";
 
-export default function PrepareMint() {
+export default function MintCharacter() {
 
     const { address, isConnecting, isDisconnected, isConnected } = useAccount();
     const [discID, setDiscID] = useState(0);
     const [discType, setType] = useState(ethers.BigNumber.from(0));
 
-    const { refetchDisc, setRefetchDisc } = useActions();
-
-    const RARITY = ["FARMER", "BULL", "BEAR"];
+    const { refetchBreeding, setRefetchBreeding } = useActions();
 
 
-
-    const {
-        data: readDiscType,
-        isError: isReadError,
-        isLoading: isReadLoading,
-        error: readError,
-    } = useContractRead({
-        address: CONTRACTS.PEPE_DISC,
-        abi: PEPE_DISC_CONTRACT.abi,
-        functionName: 'returnDiscType',
-        args: [discID],
-
-
-    });
-
-
-    const {
-        data: readPrice,
-        isError: isReadPrice,
-        isLoading: isReadPriceLoading,
-        error: readPriceError,
-    } = useContractRead({
-        address: CONTRACTS.CHARACTER,
-        abi: CHARACTER_CONTRACT.abi,
-        functionName: 'calculateTokenPrice',
-        args: [readDiscType],
-
-
-    });
-
-
-    useEffect(() => {
-        if (readDiscType != undefined) {
-            setType(readDiscType.tokenType)
-            console.log(readDiscType.tokenType)
-        }
-    })
 
 
 
@@ -73,8 +34,8 @@ export default function PrepareMint() {
     } = usePrepareContractWrite({
         address: CONTRACTS.CHARACTER,
         abi: CHARACTER_CONTRACT.abi,
-        functionName: "prepareMint",
-        args: [discID, readPrice],
+        functionName: "mintMyCharacter",
+        args: [discID],
 
     });
     const { data, write, error: writeError } = useContractWrite(config);
@@ -84,7 +45,7 @@ export default function PrepareMint() {
             hash: data?.hash,
 
             onSuccess() {
-                setRefetchDisc(!refetchDisc)
+                setRefetchBreeding(!refetchBreeding)
             },
         });
 
@@ -95,8 +56,6 @@ export default function PrepareMint() {
     }, [isError])
 
 
-    console.log("PRICE: ", readPrice)
-    // console.log("fkn result: ", data)
 
     const parseErrorMessage = (error) => {
         const parsed = JSON.parse(JSON.stringify(error)).reason;
@@ -134,7 +93,7 @@ export default function PrepareMint() {
 
         <div className="flex flex-col items-center">
 
-            <p>SELECT DISC TO BREED:</p>
+            <p>SELECT CHARACTER TO BREED:</p>
             <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                 type="number"
@@ -145,33 +104,30 @@ export default function PrepareMint() {
             />
 
 
-            {readPrice != undefined &&
+            {
                 (isError) ? (
-                <div className={`${styles.font_style_1}`}>
-                    {parseErrorMessage(prepareError)
-                        .toUpperCase()
-                        .replace(/EXECUTION REVERTED:/g, "")}
-                </div>
-            ) : (
-                <article className={`${styles.font_style_1}`}>
-                    <span
-                        className={styles.mint_btn}
-                        onClick={() => {
-                            console.log("write")
-                            write?.();
-                        }}
-                    >
-                        START BREEDING
-                    </span>{" "}
+                    <div className={`${styles.font_style_1}`}>
+                        {parseErrorMessage(prepareError)
+                            .toUpperCase()
+                            .replace(/EXECUTION REVERTED:/g, "")}
+                    </div>
+                ) : (
+                    <article className={`${styles.font_style_1}`}>
+                        <span
+                            className={styles.mint_btn}
+                            onClick={() => {
+                                console.log("write")
+                                write?.();
+                            }}
+                        >
+                            MINT NOW!
+                        </span>{" "}
 
 
 
-                </article>
-            )
+                    </article>
+                )
             }
-            <div>{discID}</div>
-            <div>DISC: {RARITY[Number(discType)]}</div>
-            <div>PRICE: {readPrice != undefined ? (readPrice.toString()) : "tbd"}</div>
 
 
         </div>
