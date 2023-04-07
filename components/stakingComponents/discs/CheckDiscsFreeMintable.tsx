@@ -15,13 +15,13 @@ export default function CheckDiscsFreeMintable() {
     const { address, isConnecting, isDisconnected, isConnected } = useAccount();
     const [driveID, setDriveID] = useState();
     const { driveToQuery, setDriveToQuery } = useActions();
-
+    const { refetchDisc, setRefetchDisc } = useActions();
     const { currentOwner, setCurrentOwner } = useActions();
 
     const { freeMintDisc, setFreeMintDisc } = useActions();
 
 
-    const { data, isError, error, isLoading, } = useContractRead({
+    const { data, isError, error, isLoading, refetch } = useContractRead({
         address: CONTRACTS.PEPE_DISC,
         abi: PEPE_DISC_CONTRACT.abi,
         functionName: 'checkFreePerDriveID',
@@ -29,7 +29,7 @@ export default function CheckDiscsFreeMintable() {
 
     })
 
-    const { data: owner, isError: isReadOwnerError, error: readOwnerError } = useContractRead({
+    const { data: owner, isError: isReadOwnerError, error: readOwnerError, refetch: refetchReadOwner } = useContractRead({
         address: CONTRACTS.PEPE_DRIVE,
         abi: PEPE_DRIVE_CONTRACT.abi,
         functionName: 'ownerOf',
@@ -40,6 +40,12 @@ export default function CheckDiscsFreeMintable() {
     useEffect(() => {
         console.log(error)
     }, [isError])
+
+
+    useEffect(() => {
+        refetch?.()
+        refetchReadOwner?.()
+    }, [refetchDisc])
 
     const pepeDriveContract = {
         address: CONTRACTS.PEPE_DRIVE,

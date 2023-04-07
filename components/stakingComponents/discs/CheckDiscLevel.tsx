@@ -22,7 +22,7 @@ export default function CheckDiscLevel() {
     const [tokenmap, setTokenMap] = useState<Map<string, [string, string]>>();
 
     const [loading, setLoading] = useState(false)
-
+    const { refetchDisc } = useActions();
     const RARITY = ["FARMER", "BULL", "BEAR"]
 
 
@@ -33,6 +33,7 @@ export default function CheckDiscLevel() {
         isError: isReadError,
         isLoading: isReadLoading,
         error: readError,
+        refetch
     } = useContractRead({
         address: CONTRACTS.PEPE_DISC,
         abi: PEPE_DISC_CONTRACT.abi,
@@ -44,12 +45,18 @@ export default function CheckDiscLevel() {
 
 
     useEffect(() => {
+        refetch?.()
+    }, [refetchDisc])
+
+
+
+    useEffect(() => {
         console.log("isReadError: ", isReadError);
         console.log(readError)
     }, [isReadError]);
 
     const fetchTokenData = async () => {
-
+        refetch?.()
         setLoading(true);
 
         console.log("fetch token data:", readData)

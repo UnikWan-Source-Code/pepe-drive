@@ -21,13 +21,9 @@ export default function StakeDisc() {
 
     const [discID, setDiscID] = useState(0);
 
-    const { driveToQuery, setDriveToQuery } = useActions();
+    const { refetchStake, setRefetchStake } = useActions();
 
-    const { stakingDriveOwner, setStakingDriveOwner } = useActions();
 
-    const { currentOwner, setCurrentOwner } = useActions();
-
-    const { freeMintDisc, setFreeMintDisc } = useActions();
 
 
 
@@ -50,7 +46,7 @@ export default function StakeDisc() {
             hash: data?.hash,
 
             onSuccess() {
-                console.log("success!");
+                setRefetchStake(!refetchStake)
             },
         });
 

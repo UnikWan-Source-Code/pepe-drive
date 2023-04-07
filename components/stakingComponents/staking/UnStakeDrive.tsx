@@ -22,6 +22,8 @@ export default function UnStakeDrive() {
 
     const { driveToQuery, setDriveToQuery } = useActions();
 
+    const { refetchStake, setRefetchStake } = useActions();
+
     const { stakingDriveOwner, setStakingDriveOwner } = useActions();
 
     const { currentOwner, setCurrentOwner } = useActions();
@@ -49,7 +51,7 @@ export default function UnStakeDrive() {
             hash: data?.hash,
 
             onSuccess() {
-                console.log("success!");
+                setRefetchStake(!refetchStake)
             },
         });
 

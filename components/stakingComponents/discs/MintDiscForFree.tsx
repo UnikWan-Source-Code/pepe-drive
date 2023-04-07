@@ -22,6 +22,7 @@ export default function MintDiscForFree() {
 
     const [amount, setAmount] = useState(1);
     const { freeMintDisc, setFreeMintDisc } = useActions();
+    const { refetchDisc, setRefetchDisc } = useActions();
     const { driveToQuery, setDriveToQuery } = useActions();
 
 
@@ -69,8 +70,9 @@ export default function MintDiscForFree() {
             hash: data?.hash,
 
             onSuccess() {
-                console.log("success!");
+                setRefetchDisc(!refetchDisc);
             },
+
         });
 
 

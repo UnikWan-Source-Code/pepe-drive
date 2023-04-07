@@ -13,24 +13,54 @@ import CHARACTER_CONTRACT from "../../../contract/Character.json";
 import { CONTRACTS } from "../../../config/ContractEnum";
 import { useActions } from "../../../hooks/useActions";
 import styles from "../../../styles/Home.module.css";
+import { ethers } from "ethers";
 
-export default function UnStakeDisc() {
+export default function PrepareMint() {
 
     const { address, isConnecting, isDisconnected, isConnected } = useAccount();
-    const [driveID, setDriveID] = useState(0);
-
     const [discID, setDiscID] = useState(0);
+    const [discType, setType] = useState(ethers.BigNumber.from(0));
 
-    const { refetchStake, setRefetchStake } = useActions();
+    const RARITY = ["FARMER", "BULL", "BEAR"];
 
-    const { driveToQuery, setDriveToQuery } = useActions();
 
-    const { stakingDriveOwner, setStakingDriveOwner } = useActions();
 
-    const { currentOwner, setCurrentOwner } = useActions();
+    const {
+        data: readData,
+        isError: isReadError,
+        isLoading: isReadLoading,
+        error: readError,
+    } = useContractRead({
+        address: CONTRACTS.PEPE_DISC,
+        abi: PEPE_DISC_CONTRACT.abi,
+        functionName: 'tokensOfOwner',
+        args: [discID],
 
-    const { freeMintDisc, setFreeMintDisc } = useActions();
 
+    });
+
+
+    const {
+        data: readPrice,
+        isError: isReadPrice,
+        isLoading: isReadPriceLoading,
+        error: readPriceError,
+    } = useContractRead({
+        address: CONTRACTS.CHARACTER,
+        abi: CHARACTER_CONTRACT.abi,
+        functionName: 'calculateTokenPrice',
+        args: [discID],
+
+
+    });
+
+
+    useEffect(() => {
+        if (readData != undefined) {
+            setType(readData.tokenType)
+            console.log(readData.tokenType)
+        }
+    })
 
 
 
@@ -39,10 +69,10 @@ export default function UnStakeDisc() {
         error: prepareError,
         isError,
     } = usePrepareContractWrite({
-        address: CONTRACTS.PEPE_STAKING,
-        abi: PEPE_STAKING_CONTRACT.abi,
-        functionName: "ejectDisc",
-        args: [discID],
+        address: CONTRACTS.CHARACTER,
+        abi: CHARACTER_CONTRACT.abi,
+        functionName: "prepareMint",
+        args: [discID, readPrice],
 
     });
     const { data, write, error: writeError } = useContractWrite(config);
@@ -52,7 +82,7 @@ export default function UnStakeDisc() {
             hash: data?.hash,
 
             onSuccess() {
-                setRefetchStake(!refetchStake)
+                console.log("success!");
             },
         });
 
@@ -87,10 +117,9 @@ export default function UnStakeDisc() {
         return JSON.parse(JSON.stringify(error)).reason;
     };
 
-
-
-    const handleDiscChange = (event) => {
+    const handleInputChange = (event) => {
         setDiscID(event.target.value);
+
     };
 
 
@@ -99,44 +128,45 @@ export default function UnStakeDisc() {
     return (
 
         <div className="flex flex-col items-center">
-            <p>UNSTAKE DISC:</p>
 
+            <p>SELECT DRIVE:</p>
             <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                 type="number"
-                placeholder="ENTER YOUR DISC NUMBER"
+                placeholder="Enter a number"
                 value={discID}
-                onChange={handleDiscChange}
+                onChange={handleInputChange}
                 aria-label="Enter a number"
             />
 
 
-
-            {(prepareError) ? (
-                <div className={`${styles.font_style_1}`}>
-                    {parseErrorMessage(prepareError)
-                        .toUpperCase()
-                        .replace(/EXECUTION REVERTED:/g, "")}
-                </div>
-            ) : (
-
-                <article className={`${styles.font_style_1}`}>
-                    <span
-                        className={styles.mint_btn}
-                        onClick={() => {
-                            console.log("write")
-                            write?.();
-                        }}
-                    >
-                        UNSTAKE DISC
-                    </span>{" "}
-
-                </article>
-            )
+            {
+                (isError) ? (
+                    <div className={`${styles.font_style_1}`}>
+                        {parseErrorMessage(prepareError)
+                            .toUpperCase()
+                            .replace(/EXECUTION REVERTED:/g, "")}
+                    </div>
+                ) : (
+                    <article className={`${styles.font_style_1}`}>
+                        <span
+                            className={styles.mint_btn}
+                            onClick={() => {
+                                console.log("write")
+                                write?.();
+                            }}
+                        >
+                            START BREEDING
+                        </span>{" "}
 
 
+
+                    </article>
+                )
             }
-
+            <div>{discID}</div>
+            <div>DISC: {RARITY[Number(discType)]}</div>
+            <div>PRICE: {readPrice}</div>
 
 
         </div>

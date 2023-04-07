@@ -1,13 +1,13 @@
 import { getDefaultProvider } from 'ethers';
 import { WagmiConfig, createClient, configureChains } from 'wagmi';
-import { mainnet, goerli } from 'wagmi/chains'
+import { mainnet, sepolia, goerli } from 'wagmi/chains'
 import { infuraProvider } from 'wagmi/providers/infura';
 import { publicProvider } from 'wagmi/providers/public';
 import { connectorsForWallets, getDefaultWallets } from '@rainbow-me/rainbowkit';
 
 
 const { chains, webSocketProvider, provider } = configureChains(
-    [goerli, mainnet],
+    [goerli, sepolia, mainnet],
     [
         infuraProvider({ apiKey: 'bce78b4df3774cfeb430963ce0cb9cde' }),
         publicProvider(),

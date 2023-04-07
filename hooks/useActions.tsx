@@ -18,6 +18,10 @@ interface IActionContext {
     setDriveToQuery: Dispatch<SetStateAction<number>>;
     setBalancePepe: Dispatch<SetStateAction<BigNumber>>;
     setStakingDriveOwner: Dispatch<SetStateAction<string>>;
+    setRefetchDisc: Dispatch<SetStateAction<boolean>>;
+    setRefetchStake: Dispatch<SetStateAction<boolean>>;
+    refetchStake: boolean;
+    refetchDisc: boolean;
     stakingDriveOwner: string;
     balancePepe: number;
     freeMintDisc: number;
@@ -39,6 +43,8 @@ export function ActionProvider({ children }: Props) {
     const [currentOwner, setCurrentOwner] = useState(ethers.constants.AddressZero)
     const [stakingDriveOwner, setStakingDriveOwner] = useState(ethers.constants.AddressZero)
     const [balancePepe, setBalancePepe] = useState(ethers.BigNumber.from(0));
+    const [refetchDisc, setRefetchDisc] = useState(false);
+    const [refetchStake, setRefetchStake] = useState(false);
 
     const providerValues: IActionContext = useMemo(
         () => ({
@@ -47,6 +53,10 @@ export function ActionProvider({ children }: Props) {
             currentOwner,
             balancePepe,
             stakingDriveOwner,
+            refetchDisc,
+            refetchStake,
+            setRefetchStake,
+            setRefetchDisc,
             setDriveToQuery,
             setFreeMintDisc,
             setCurrentOwner,
@@ -54,7 +64,7 @@ export function ActionProvider({ children }: Props) {
             setStakingDriveOwner
 
         }),
-        [freeMintDisc, currentOwner, driveToQuery, balancePepe, stakingDriveOwner]
+        [freeMintDisc, currentOwner, driveToQuery, balancePepe, stakingDriveOwner, refetchDisc, refetchStake]
     );
 
     return (

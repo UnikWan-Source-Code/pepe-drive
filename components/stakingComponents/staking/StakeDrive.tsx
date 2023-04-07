@@ -19,13 +19,9 @@ export default function StakeDrive() {
     const { address, isConnecting, isDisconnected, isConnected } = useAccount();
     const [driveID, setDriveID] = useState(0);
     const [approval, setApproval] = useState(false);
-    const { driveToQuery, setDriveToQuery } = useActions();
 
-    const { stakingDriveOwner, setStakingDriveOwner } = useActions();
 
-    const { currentOwner, setCurrentOwner } = useActions();
-
-    const { freeMintDisc, setFreeMintDisc } = useActions();
+    const { refetchStake, setRefetchStake } = useActions();
 
 
     const { data: isApprovedForAll, isError: isReadOwnerError, error: readOwnerError } = useContractRead({
@@ -92,7 +88,7 @@ export default function StakeDrive() {
             hash: data?.hash,
 
             onSuccess() {
-                console.log("success!");
+                setRefetchStake(!refetchStake)
             },
         });
 
