@@ -19,7 +19,7 @@ export default function ShowAllStakedTokens() {
     const [stringDrives, setStringDrives] = useState([])
     const [stringDiscs, setStringDiscs] = useState([])
 
-    const [driveMap, setDriveMap] = useState<Map<string, [string, string]>>();
+    const [driveMap, setDriveMap] = useState<Map<string, boolean>>();
     const [loading, setLoading] = useState(false)
 
     const { driveToQuery, setDriveToQuery } = useActions();
@@ -78,10 +78,10 @@ export default function ShowAllStakedTokens() {
 
     useEffect(() => {
         if (drives != undefined) {
-            setStringDrives(drives.map((number) => number.toString()));
+            setStringDrives((drives as BigNumber[]).map((number) => number.toString()));
         }
         if (discs != undefined) {
-            setStringDiscs(discs.map((number) => number.toString()));
+            setStringDiscs((discs as BigNumber[]).map((number) => number.toString()));
         }
 
     }, [drives, discs])
@@ -93,12 +93,7 @@ export default function ShowAllStakedTokens() {
         refetchDrives?.()
         setLoading(true);
 
-        // console.log("fetch token data:", readData)
-        // console.log("readData[0]", readData[0])
-        // console.log("readData[0]", readData[1])
-
         const arrayLength = (drives as BigNumber[]).length;
-
 
         const tokenMap: Map<string, boolean> = new Map<string, boolean>();
 
@@ -113,15 +108,15 @@ export default function ShowAllStakedTokens() {
                     abi: PEPE_STAKING_CONTRACT.abi,
                     functionName: 'discInDrive',
                     args: [drives[i]]
-                });
+                }) as boolean;
 
-                tokenMap.set(tokenId.toString(), tokenObject.toString());
+                tokenMap.set(tokenId.toString(), tokenObject);
 
 
 
-                console.log(`Token object for tokenId ${tokenId.toString()}:`, tokenObject.toString());
+                // console.log(`Token object for tokenId ${tokenId.toString()}:`, tokenObject.toString());
             } catch (error) {
-                console.error(`Error fetching token object for tokenId ${tokenId.toString()}:`, error);
+                // console.error(`Error fetching token object for tokenId ${tokenId.toString()}:`, error);
             }
 
         }
@@ -134,52 +129,57 @@ export default function ShowAllStakedTokens() {
 
 
     return (
-        <>
+        <div className="flex flex-col items-center border-2 border-black p-4 w-1/2 m-8 ">
+            <div className="text-gray-400">YOU CAN CHECK ALL YOUR STAKED ITEMS HERE.</div>
+            <div className="flex flex-row justify-around w-full m-4">
 
-            <div>
-                YOUR STAKED DRIVES:
-                {stringDrives != undefined &&
-                    stringDrives.map((number, index) => (
-                        <p key={index}>{number}</p>
-                    ))}
-
-
-            </div>
-
-            <div>
-                YOUR STAKED DISCS:
-                {stringDiscs != undefined &&
-                    stringDiscs.map((number, index) => (
-                        <p key={index}>{number}</p>
-                    ))}
-
-
-            </div>
-
-            {(typeof driveMap !== 'undefined' && driveMap.size > 0 ? (
-                <div>
-                    <div onClick={fetchTokenData}>Your Tokens:</div>
-                    <ul>
-                        {Array.from(driveMap.entries()).map(([tokenId, isEmpty]) => (  //([tokenId, [discType, discLevel]])
-                            <li key={tokenId}>
-                                DRIVE ID: {tokenId} - FULL: {isEmpty}
-                            </li>
+                <div className="w-full text-center">
+                    YOUR STAKED DRIVES:
+                    {stringDrives != undefined &&
+                        stringDrives.map((number, index) => (
+                            <div key={index}>DRIVE: {number}</div>
                         ))}
-                    </ul>
-                </div>) : (
 
 
-                <div className="border-rounded border-2 border-black cursor-pointer" onClick={fetchTokenData}>{loading ? <div class="flex justify-center items-center">
-                    <svg className="animate-spin h-5 w-5 mr-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <circle className="opacity-25" cx="10" cy="10" r="8" stroke="currentColor" stroke-width="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 10a6 6 0 0 1 6-6h0a6 6 0 0 1 6 6v0a6 6 0 0 1-6 6h0a6 6 0 0 1-6-6z"></path>
-                    </svg>
-                    <span>Loading...</span>
-                </div> : <div>CHECK MY EMPTY DRIVES</div>}
                 </div>
 
-            ))}
-        </>
+                <div className="w-full  text-center">
+                    YOUR STAKED DISCS:
+                    {stringDiscs != undefined &&
+                        stringDiscs.map((number, index) => (
+                            <div key={index}>DSIC: {number}</div>
+                        ))}
+
+
+                </div>
+            </div>
+            <div>
+                {(typeof driveMap !== 'undefined' && driveMap.size > 0 ? (
+                    <div>
+                        <div className="border-rounded border-2 border-black cursor-pointer" onClick={fetchTokenData}>YOUR STAKED DRIVES: (REFETCH)</div>
+                        <ul className="text-center">
+                            {Array.from(driveMap.entries()).map(([tokenId, isEmpty]) => (  //([tokenId, [discType, discLevel]])
+
+                                <li key={tokenId}>
+                                    DRIVE ID: {tokenId} - FULL: {isEmpty}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>) : (
+
+
+                    <div className="border-rounded border-2 border-black cursor-pointer" onClick={fetchTokenData}>{loading ? <div className="flex justify-center items-center">
+                        <svg className="animate-spin h-5 w-5 mr-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <circle className="opacity-25" cx="10" cy="10" r="8" stroke="currentColor" stroke-width="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 10a6 6 0 0 1 6-6h0a6 6 0 0 1 6 6v0a6 6 0 0 1-6 6h0a6 6 0 0 1-6-6z"></path>
+                        </svg>
+                        <span>Loading...</span>
+                    </div> : <div className="p-4">CHECK MY EMPTY DRIVES</div>}
+                    </div>
+
+                ))}
+            </div>
+        </div >
     )
 
 }

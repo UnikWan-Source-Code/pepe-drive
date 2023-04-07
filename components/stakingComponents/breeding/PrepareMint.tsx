@@ -13,7 +13,7 @@ import CHARACTER_CONTRACT from "../../../contract/Character.json";
 import { CONTRACTS } from "../../../config/ContractEnum";
 import { useActions } from "../../../hooks/useActions";
 import styles from "../../../styles/Home.module.css";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 
 export default function PrepareMint() {
 
@@ -59,8 +59,8 @@ export default function PrepareMint() {
 
     useEffect(() => {
         if (readDiscType != undefined) {
-            setType(readDiscType.tokenType)
-            console.log(readDiscType.tokenType)
+            setType(readDiscType as BigNumber)
+            console.log(readDiscType as BigNumber)
         }
     })
 
@@ -96,7 +96,7 @@ export default function PrepareMint() {
 
 
     console.log("PRICE: ", readPrice)
-    // console.log("fkn result: ", data)
+
 
     const parseErrorMessage = (error) => {
         const parsed = JSON.parse(JSON.stringify(error)).reason;
@@ -106,18 +106,7 @@ export default function PrepareMint() {
             return "TOKEN LIMIT REACHED";
         }
 
-        if (parsed === "insufficient funds for intrinsic transaction cost") {
-            return "YOU NEED MORE ETH";
-        }
-        if (parsed == "execution reverted: Mint not started, yet") {
-            return "MINT NOT OPEN";
-        }
-        if (parsed == "execution reverted: Mint is over") {
-            return "MINT IS OVER";
-        }
-        if (parsed == "execution reverted: Invalid proof") {
-            return "NOT WHITELISTED. SAD.";
-        }
+
 
         return JSON.parse(JSON.stringify(error)).reason;
     };
@@ -132,11 +121,12 @@ export default function PrepareMint() {
 
     return (
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center border-2 border-black p-4 w-1/2">
+            <div className="text-gray-400">PREPARE FOR BREED HERE - COME BACK LATER.</div>
 
-            <p>SELECT DISC TO BREED:</p>
+            <div className="mb-2">SELECT DISC TO BREED:</div>
             <input
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-center"
                 type="number"
                 placeholder="Enter a number"
                 value={discID}
@@ -169,8 +159,8 @@ export default function PrepareMint() {
                 </article>
             )
             }
-            <div>{discID}</div>
-            <div>DISC: {RARITY[Number(discType)]}</div>
+
+            <div className="mt-4">DISC: {RARITY[Number(discType)]}</div>
             <div>PRICE: {readPrice != undefined ? (readPrice.toString()) : "tbd"}</div>
 
 

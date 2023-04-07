@@ -98,11 +98,13 @@ export default function UnStakeDisc() {
 
     return (
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center border-2 border-black p-4 w-1/2">
+            <div className="text-gray-400">YOU CAN EJECT YOUR DISCS HERE.</div>
+            <div className="text-gray-400 text-xs">*SOMETIMES DISCS BURRRRN...</div>
             <p>UNSTAKE DISC:</p>
 
             <input
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-center"
                 type="number"
                 placeholder="ENTER YOUR DISC NUMBER"
                 value={discID}
@@ -128,7 +130,7 @@ export default function UnStakeDisc() {
                             write?.();
                         }}
                     >
-                        UNSTAKE DISC
+                        EJECT DISC
                     </span>{" "}
 
                 </article>

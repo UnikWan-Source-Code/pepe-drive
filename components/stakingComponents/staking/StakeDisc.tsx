@@ -6,10 +6,8 @@ import {
     useWaitForTransaction,
 } from "wagmi";
 import { useState, useEffect } from "react";
-import PEPE_DRIVE_CONTRACT from "../../../contract/PepeDrive.json";
-import PEPE_DISC_CONTRACT from "../../../contract/PepeDisc.json";
+
 import PEPE_STAKING_CONTRACT from "../../../contract/PepeStaking.json";
-import CHARACTER_CONTRACT from "../../../contract/Character.json";
 import { CONTRACTS } from "../../../config/ContractEnum";
 import { useActions } from "../../../hooks/useActions";
 import styles from "../../../styles/Home.module.css";
@@ -17,9 +15,9 @@ import styles from "../../../styles/Home.module.css";
 export default function StakeDisc() {
 
     const { address, isConnecting, isDisconnected, isConnected } = useAccount();
-    const [driveID, setDriveID] = useState(0);
+    const [driveID, setDriveID] = useState();
 
-    const [discID, setDiscID] = useState(0);
+    const [discID, setDiscID] = useState();
 
     const { refetchStake, setRefetchStake } = useActions();
 
@@ -61,22 +59,16 @@ export default function StakeDisc() {
         const parsed = JSON.parse(JSON.stringify(error)).reason;
         console.log(parsed);
 
-        if (parsed === "execution reverted: token limit per wallet reached") {
-            return "TOKEN LIMIT REACHED";
+        if (parsed == "execution reverted: you are not the owner") {
+            return "YOU NEED TO OWN THE ASSETS";
         }
 
-        if (parsed === "insufficient funds for intrinsic transaction cost") {
-            return "YOU NEED MORE ETH";
+
+        if (parsed == "invalid BigNumber string") {
+            return "JUST ENTER A NUMBER.";
         }
-        if (parsed == "execution reverted: Mint not started, yet") {
-            return "MINT NOT OPEN";
-        }
-        if (parsed == "execution reverted: Mint is over") {
-            return "MINT IS OVER";
-        }
-        if (parsed == "execution reverted: Invalid proof") {
-            return "NOT WHITELISTED. SAD.";
-        }
+
+
 
         return JSON.parse(JSON.stringify(error)).reason;
     };
@@ -94,10 +86,12 @@ export default function StakeDisc() {
 
     return (
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center border-2 border-black p-4 w-1/2">
+            <div className="text-gray-400">YOU CAN STAKE YOUR DISCS HERE.</div>
+            <div className="text-gray-400 text-xs">*YOU NEED TO STAKE A DRIVE FIRST.</div>
             <p>STAKE NOW:</p>
             <input
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-center"
                 type="number"
                 placeholder="ENTER YOUR DRIVE NUMBER"
                 value={driveID}
@@ -106,7 +100,7 @@ export default function StakeDisc() {
             />
 
             <input
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-center"
                 type="number"
                 placeholder="ENTER YOUR DISC NUMBER"
                 value={discID}

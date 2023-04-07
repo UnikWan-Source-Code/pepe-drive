@@ -14,18 +14,18 @@ import { BigNumber } from "ethers";
 
 export default function CheckDiscLevel() {
 
-    // const [tokens, setTokens] = useState<Discs[]>([]);
-
-
+    interface TokenObject {
+        tokenType: string;
+        discLevel: string;
+    }
 
     const { address, connector, isConnected } = useAccount();
     const [tokenmap, setTokenMap] = useState<Map<string, [string, string]>>();
 
     const [loading, setLoading] = useState(false)
     const { refetchDisc } = useActions();
+    const { refetchBreeding } = useActions();
     const RARITY = ["FARMER", "BULL", "BEAR"]
-
-
 
 
     const {
@@ -46,7 +46,7 @@ export default function CheckDiscLevel() {
 
     useEffect(() => {
         refetch?.()
-    }, [refetchDisc])
+    }, [refetchDisc, refetchBreeding])
 
 
 
@@ -79,9 +79,8 @@ export default function CheckDiscLevel() {
                     abi: PEPE_DISC_CONTRACT.abi,
                     functionName: 'discDetails',
                     args: [readData[i]]
-                });
+                }) as TokenObject;
 
-                tokenMap.set(tokenId.toString(), tokenObject.tokenType.toString());
 
                 tokenMap.set(tokenId.toString(), [tokenObject.tokenType.toString(), tokenObject.discLevel.toString()]);
 
@@ -89,11 +88,6 @@ export default function CheckDiscLevel() {
             } catch (error) {
                 console.error(`Error fetching token object for tokenId ${tokenId.toString()}:`, error);
             }
-            // push a new Star object into the tokenData array for each fetched token
-            // tokenData.push({
-            //     tokenID: i,
-            //     tokenRarity: tokenObject,
-            // });
         }
 
         setLoading(false);
@@ -113,28 +107,38 @@ export default function CheckDiscLevel() {
     if (typeof tokenmap !== 'undefined') {
         if (tokenmap.size > 0) {
             return (
-                <>
-                    <div onClick={fetchTokenData}>Your Tokens:</div>
+                <div className="flex flex-col items-center border-2 border-black p-4 w-1/2 m-8">
+                    <div className="border-rounded border-2 p-2 border-black cursor-pointer" onClick={fetchTokenData}>YOUR TOKENS: (REFRESH)</div>
                     <ul>
                         {Array.from(tokenmap.entries()).map(([tokenId, [discType, discLevel]]) => (  //([tokenId, [discType, discLevel]])
                             <li key={tokenId}>
-                                Token ID: {tokenId} - Rarity: {RARITY[discType]} - Level: {discLevel}
+                                TOKEN ID: {tokenId} - Rarity: {RARITY[discType]} - Level: {discLevel}
                             </li>
                         ))}
                     </ul>
 
-                </>
+                </div>
             )
+        }
+        else {
+            return (
+                <div className="flex flex-col items-center border-2 border-black p-4 w-1/2 m-8">
+                    <div className="border-rounded border-2 p-2 border-black cursor-pointer" onClick={fetchTokenData}>NO TOKENS, YET. (REFRESH?)</div>
+                </div>)
+
         }
     }
     else {
-        return (<div className="border-rounded border-2 border-black cursor-pointer" onClick={fetchTokenData}>{loading ? <div class="flex justify-center items-center">
-            <svg className="animate-spin h-5 w-5 mr-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <circle className="opacity-25" cx="10" cy="10" r="8" stroke="currentColor" stroke-width="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 10a6 6 0 0 1 6-6h0a6 6 0 0 1 6 6v0a6 6 0 0 1-6 6h0a6 6 0 0 1-6-6z"></path>
-            </svg>
-            <span>Loading...</span>
-        </div> : <div>Show my Tokens</div>}</div>)
+        return (
+            <div className="flex flex-col items-center border-2 border-black p-4 w-1/2 m-8">
+                <div className="border-rounded border-2 p-2 border-black cursor-pointer" onClick={fetchTokenData}>{loading ? <div className="flex justify-center items-center">
+                    <svg className="animate-spin h-5 w-5 mr-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <circle className="opacity-25" cx="10" cy="10" r="8" stroke="currentColor" stroke-width="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 10a6 6 0 0 1 6-6h0a6 6 0 0 1 6 6v0a6 6 0 0 1-6 6h0a6 6 0 0 1-6-6z"></path>
+                    </svg>
+                    <span>Loading...</span>
+                </div> : <div>SHOW MY DISCS</div>}</div>
+            </div>)
     }
 
 }

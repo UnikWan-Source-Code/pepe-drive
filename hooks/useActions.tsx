@@ -13,7 +13,7 @@ import {
 
 
 interface IActionContext {
-    setFreeMintDisc: Dispatch<SetStateAction<number>>;
+    setFreeMintDisc: Dispatch<SetStateAction<BigNumber>>;
     setCurrentOwner: Dispatch<SetStateAction<string>>;
     setDriveToQuery: Dispatch<SetStateAction<number>>;
     setBalancePepe: Dispatch<SetStateAction<BigNumber>>;
@@ -25,8 +25,8 @@ interface IActionContext {
     refetchStake: boolean;
     refetchDisc: boolean;
     stakingDriveOwner: string;
-    balancePepe: number;
-    freeMintDisc: number;
+    balancePepe: BigNumber;
+    freeMintDisc: BigNumber;
     currentOwner: string;
     driveToQuery: number;
 
@@ -40,7 +40,7 @@ interface Props {
 }
 
 export function ActionProvider({ children }: Props) {
-    const [freeMintDisc, setFreeMintDisc] = useState(0);
+    const [freeMintDisc, setFreeMintDisc] = useState(ethers.BigNumber.from(1));
     const [driveToQuery, setDriveToQuery] = useState(0);
     const [currentOwner, setCurrentOwner] = useState(ethers.constants.AddressZero)
     const [stakingDriveOwner, setStakingDriveOwner] = useState(ethers.constants.AddressZero)

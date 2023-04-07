@@ -3,9 +3,6 @@ import {
     useContractRead,
 } from "wagmi";
 import { useState, useEffect } from "react";
-import PEPE_DRIVE_CONTRACT from "../../../contract/PepeDrive.json";
-import PEPE_DISC_CONTRACT from "../../../contract/PepeDisc.json";
-import PEPE_STAKING_CONTRACT from "../../../contract/PepeStaking.json";
 import CHARACTER_CONTRACT from "../../../contract/Character.json";
 import { CONTRACTS } from "../../../config/ContractEnum";
 import { useActions } from "../../../hooks/useActions";
@@ -13,10 +10,6 @@ import { readContract } from '@wagmi/core'
 import { BigNumber } from "ethers";
 
 export default function GetAllCharacters() {
-
-    // const [tokens, setTokens] = useState<Discs[]>([]);
-
-
 
     const { address, connector, isConnected } = useAccount();
     const [tokenmap, setTokenMap] = useState<Map<string, [string, string]>>();
@@ -49,19 +42,21 @@ export default function GetAllCharacters() {
     }, [refetchBreeding])
 
 
-
     return (
-        <div>
-            {readData !== undefined && (
+        <div className="flex flex-col items-center border-2 border-black p-4 w-1/2">
+            <div className="text-gray-400">HERE YOU CAN CHECK WHEN YOU CAN MINT YOUR CHARACTERS</div>
+
+            {readData !== undefined && (readData as []).length != 0 ? (
                 <>
+
                     <h2>YOUR BREEDING PROCESS:</h2>
-                    {readData.map((token, index) => (
+                    {(readData as BigNumber[]).map((token, index) => (
                         <div key={index}>
                             <div>TokenID: {token[0].toString()}, Rarity:{RARITY[token[1]]}, Ready: {new Date(token[2] * 1000).toLocaleString()}</div>
                         </div>
                     ))}
                 </>
-            )}
+            ) : (<div>YOU HAVE NO CHARACTERS IN BREEDING</div>)}
         </div>
 
     )

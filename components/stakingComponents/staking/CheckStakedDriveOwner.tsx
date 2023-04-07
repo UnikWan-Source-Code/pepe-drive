@@ -3,27 +3,15 @@ import {
     useContractRead,
 } from "wagmi";
 import { useState, useEffect } from "react";
-import PEPE_DRIVE_CONTRACT from "../../../contract/PepeDrive.json";
-import PEPE_DISC_CONTRACT from "../../../contract/PepeDisc.json";
 import PEPE_STAKING_CONTRACT from "../../../contract/PepeStaking.json";
-import CHARACTER_CONTRACT from "../../../contract/Character.json";
 import { CONTRACTS } from "../../../config/ContractEnum";
 import { useActions } from "../../../hooks/useActions";
 
 export default function CheckStakedDriveOwner() {
 
-    const { address, isConnecting, isDisconnected, isConnected } = useAccount();
     const [driveID, setDriveID] = useState();
     const { driveToQuery, setDriveToQuery } = useActions();
-
     const { stakingDriveOwner, setStakingDriveOwner } = useActions();
-
-    const { currentOwner, setCurrentOwner } = useActions();
-
-    const { freeMintDisc, setFreeMintDisc } = useActions();
-
-
-
 
     const { data: owner, isError: isReadOwnerError, error: readOwnerError } = useContractRead({
         address: CONTRACTS.PEPE_STAKING,
@@ -55,14 +43,12 @@ export default function CheckStakedDriveOwner() {
         setDriveToQuery(driveID);
     };
 
-    // console.log("fkn result: ", data)
-
 
     return (
-        <>
-
-            <form onSubmit={handleSubmit} className="w-full max-w-md">
-                <div className="flex items-center border-b border-b-2 border-teal-500 py-2">
+        <div className="flex flex-col items-center border-2 border-black p-4 w-1/2 m-8">
+            <div className="text-gray-400">YOU CAN CHECK THE REAL OWNER OF THE STAKED DRIVES.</div>
+            <form onSubmit={handleSubmit} className="w-full  mt-8">
+                <div className="flex items-center border-b-2 border-teal-500 py-2">
                     <input
                         className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                         type="number"
@@ -84,6 +70,6 @@ export default function CheckStakedDriveOwner() {
                 <div>This staked drive is owned by  {stakingDriveOwner.toString()}</div>) : (<div> DRIVE NOT STAKED </div>)}
 
 
-        </>
+        </div>
     )
 }

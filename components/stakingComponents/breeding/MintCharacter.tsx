@@ -65,18 +65,6 @@ export default function MintCharacter() {
             return "TOKEN LIMIT REACHED";
         }
 
-        if (parsed === "insufficient funds for intrinsic transaction cost") {
-            return "YOU NEED MORE ETH";
-        }
-        if (parsed == "execution reverted: Mint not started, yet") {
-            return "MINT NOT OPEN";
-        }
-        if (parsed == "execution reverted: Mint is over") {
-            return "MINT IS OVER";
-        }
-        if (parsed == "execution reverted: Invalid proof") {
-            return "NOT WHITELISTED. SAD.";
-        }
 
         return JSON.parse(JSON.stringify(error)).reason;
     };
@@ -91,11 +79,13 @@ export default function MintCharacter() {
 
     return (
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center border-2 border-black p-4 w-1/2">
+            <div className="text-gray-400">MINT YOUR CHARACTERS!</div>
+            <div className="text-gray-400 text-xs">*THEY NEED TO BE FINISHED FIRST...</div>
 
             <p>SELECT CHARACTER TO BREED:</p>
             <input
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-center"
                 type="number"
                 placeholder="Enter a number"
                 value={discID}

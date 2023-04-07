@@ -119,7 +119,9 @@ export default function MintDiscPayed() {
 
     return (
         <>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center border-2 border-black p-4 w-1/2">
+                <div className="text-gray-400">EVERYBODY CAN MINT HERE (PAYED).</div>
+                <div className="text-gray-400 text-xs">*FOR TESTING 0 ETH</div>
                 <label htmlFor="amount" className="text-lg font-medium mb-2">
                     You can mint for {ethers.utils.formatEther(price.mul(amount))}:
                 </label>

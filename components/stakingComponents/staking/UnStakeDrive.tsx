@@ -97,11 +97,13 @@ export default function UnStakeDrive() {
 
     return (
 
-        <div className="flex flex-col items-center">
+
+        <div className="flex flex-col items-center border-2 border-black p-4 w-1/2">
+            <div className="text-gray-400">YOU CAN EJECT YOUR DRIVES HERE.</div>
             <p>UNSTAKE DRIVE:</p>
 
             <input
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none text-center"
                 type="number"
                 placeholder="ENTER YOUR DRIVE NUMBER"
                 value={driveID}

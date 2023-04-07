@@ -16,14 +16,12 @@ import styles from "../../../styles/Home.module.css";
 
 export default function MintDiscForFree() {
 
-    const { address, isConnecting, isDisconnected, isConnected } = useAccount();
-    const [driveID, setDriveID] = useState();
 
 
     const [amount, setAmount] = useState(1);
-    const { freeMintDisc, setFreeMintDisc } = useActions();
+    const { freeMintDisc } = useActions();
     const { refetchDisc, setRefetchDisc } = useActions();
-    const { driveToQuery, setDriveToQuery } = useActions();
+    const { driveToQuery } = useActions();
 
 
     const parseErrorMessage = (error) => {
@@ -79,13 +77,9 @@ export default function MintDiscForFree() {
     useEffect(() => {
         console.log(prepareError)
     }, [isError])
-    // console.log("fkn result: ", data)
-
-
-
 
     const handleIncrement = () => {
-        if (amount < freeMintDisc) {
+        if (amount < Number(freeMintDisc)) {
             setAmount(amount + 1);
         }
     };
@@ -104,9 +98,10 @@ export default function MintDiscForFree() {
 
     return (
         <>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center border-2 border-black p-4 w-1/2">
+                <div className="text-gray-400">IF YOU OWN A DRIVE WITH FREE MINTS LEFT, THIS WINDOW APPEARS.</div>
                 <label htmlFor="amount" className="text-lg font-medium mb-2">
-                    You can mint {freeMintDisc.toString()} for this drive for free:
+                    YOU CAN MINT {freeMintDisc.toString()} FOR THIS DRIVE FOR FREE:
                 </label>
                 <div className="flex items-center mb-4">
                     <button
@@ -140,19 +135,38 @@ export default function MintDiscForFree() {
                             .replace(/EXECUTION REVERTED:/g, "")}
                     </div>
                 ) : (
-                    <article className={`${styles.font_style_1}`}>
-                        <span
-                            className={styles.mint_btn}
-                            onClick={() => {
-                                console.log("write")
-                                write?.();
-                            }}
-                        >
-                            MINT NOW
-                        </span>{" "}
 
-                    </article>
+                    transactionLoading ? (<div>
+
+                        <article className={`${styles.font_style_1}`}>
+                            <span
+                                className={styles.mint_btn}
+
+                            >
+                                MINTING - WOOP WOOP
+                            </span>{" "}
+
+                        </article>
+
+
+                    </div>) : (
+
+                        <article className={`${styles.font_style_1}`}>
+                            <span
+                                className={styles.mint_btn}
+                                onClick={() => {
+                                    console.log("write")
+                                    write?.();
+                                }}
+                            >
+                                MINT NOW
+                            </span>{" "}
+
+                        </article>
+                    )
                 )}
+
+                {transactionSuccess && <div className="m-4">MINT SUCCESSFUL</div>}
 
             </div>
 
